@@ -1,29 +1,42 @@
 <template>
-    <div class="head_inp">
+    <div class="head_inp" :style="{position:posi}">
         <a href="###">
         <i class="iconfont icon-sousuo"></i>
         <span>搜索饿了么商家、商品名称</span></a>
     </div>
 </template>
+<script>
+export default {
+  components: {},
+  data() {
+    return {
+      posi: "static"
+    };
+  },
+  mounted() {
+    window.onscroll = () => {
+      if (window.scrollY >= 47) {
+        this.posi = "fixed";
+      } else {
+        this.posi = "static";
+      }
+    };
+  }
+};
+</script>
+
 <style lang="scss" scoped>
 @import "../assets/iconfont/iconfont.css";
 @import "../assets/iconfont/demo.css";
 .head_inp {
-  position: -webkit-sticky;
-  position: sticky;
   z-index: 999;
   top: 0;
+  width: 92.6%;
+  left: 0px;
   padding: 0.2rem 0.373333rem;
   margin: -0.013333rem 0;
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(#0af),
-    to(#0085ff)
-  );
-  background-image: -webkit-linear-gradient(left, #0af, #0085ff);
-  background-image: linear-gradient(90deg, #0af, #0085ff);
+  background: linear-gradient(90deg, #0af, #0085ff);
+  // background:#0af;
   a {
     background: #fff;
     color: #999;

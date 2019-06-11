@@ -1,11 +1,25 @@
 <template>
   <div id="app">
    <router-view></router-view>    
+   <wfooter/>
   </div>
 </template>
+<script>
+import wfooter from "@/components/Wfooter.vue";
+export default {
+  components: {
+    wfooter
+  }
+};
+</script>
+
 <style lang="scss">
-*{
-  padding:0px;
-  margin:0px;
+@import "./assets/css/base.css";
+* {
+  padding: 0px;
+  margin: 0px;
 }
+// #app {
+//   width: 100%;
+// }
 </style>
