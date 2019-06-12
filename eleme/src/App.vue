@@ -3,9 +3,12 @@
    <router-view></router-view>    
   </div>
 </template>
+<script> 
+export default {
+  
+};
+</script>
+
 <style lang="scss">
-*{
-  padding:0px;
-  margin:0px;
-}
+@import "./assets/css/base.css";
 </style>
