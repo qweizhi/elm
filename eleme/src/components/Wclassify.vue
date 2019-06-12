@@ -1,23 +1,43 @@
 <template>
     <div class="classify">
-         <div class="swiper-container" id="swiper_box">
+         <!-- <div class="swiper-container" id="swiper_box">
     <div class="swiper-wrapper swiper_list">
       <div class="swiper-slide">
-              <a  v-for="(t1,index1) in arrbefor" :key="index1">
+              <a class="swi_item" v-for="(t1,index1) in arrbefor" :key="index1">
                   <img :src="t1.image">
                   <span v-text="t1.name"></span>
               </a>
+              <a href="###">1</a>
       </div>
         <div class="swiper-slide">
-              <a  v-for="(t2,index2) in arrafter" :key="index2">
+              <a class="swi_item"  v-for="(t2,index2) in arrafter" :key="index2">
                   <img :src="t2.image">
                   <span v-text="t2.name"></span>
               </a>
+              <a href="###">2</a>
       </div>
     </div>
     <div class="swiper-pagination btn"></div>
-  </div>
-    </div>
+  </div> -->
+        <div class="swiper-container" id="swiper_box">
+            <div class="swiper-wrapper">
+          <div class="swiper-slide">
+                        <a class="swi_item" v-for="(t1,index1) in arrbefor" :key="index1">
+                            <img :src="t1.image">
+                            <span v-text="t1.name"></span>
+                        </a>
+                </div>
+            <div class="swiper-slide">
+                        <a class="swi_item"  v-for="(t2,index2) in arrafter" :key="index2">
+                            <img :src="t2.image">
+                            <span v-text="t2.name"></span>
+                        </a>
+                </div>
+              </div>
+              <!-- Add Pagination -->
+              <div class="swiper-pagination"></div>
+            </div>
+              </div>
 </template>
 <script>
 import "../assets/js/swiper.min.js";
@@ -40,12 +60,16 @@ export default {
     this.arrbefor = data[0].entries.slice(0, 10);
     this.arrafter = data[0].entries.slice(10, -1);
   },
-  mounted: function() {
+  mounted() {
     var swiper = new Swiper(".swiper-container", {
       pagination: {
         el: ".swiper-pagination"
-      },
-      loop: true
+      }
+      // loop: true,
+      // autoplay: {
+      //   delay: 4000,
+      //   disableOnInteraction: false
+      // }
     });
   }
 };
@@ -58,12 +82,12 @@ export default {
   height: 4.72rem;
   #swiper_box {
     height: 100%;
-    .swiper_list {
+    .swiper-wrapper {
       .swiper-slide {
         display: flex;
         flex-wrap: wrap;
         //   justify-content: space-between;
-        a {
+        .swi_item {
           width: 20%;
           display: flex;
           flex-direction: column;

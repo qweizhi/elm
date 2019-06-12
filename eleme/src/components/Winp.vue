@@ -1,28 +1,12 @@
 <template>
-    <div class="head_inp" :style="{position:posi}">
+    <div class="head_inp">
         <a href="###">
         <i class="iconfont icon-sousuo"></i>
         <span>搜索饿了么商家、商品名称</span></a>
     </div>
 </template>
 <script>
-export default {
-  components: {},
-  data() {
-    return {
-      posi: "static"
-    };
-  },
-  mounted() {
-    window.onscroll = () => {
-      if (window.scrollY >= 47) {
-        this.posi = "fixed";
-      } else {
-        this.posi = "static";
-      }
-    };
-  }
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
@@ -30,6 +14,7 @@ export default {
 @import "../assets/iconfont/demo.css";
 .head_inp {
   z-index: 999;
+  position: sticky;
   top: 0;
   width: 92.6%;
   left: 0px;

@@ -45,7 +45,7 @@ export default {
       },
       loop: true,
       autoplay: {
-        delay: 2500,
+        delay: 4000,
         disableOnInteraction: false
       }
     });
@@ -57,7 +57,7 @@ export default {
 @import "../assets/css/swiper.min.css";
 
 .combo {
-    margin-top:.266667rem;
+  margin-top: 0.266667rem;
   padding: 0 0.266667rem;
   .combo-box {
     background: linear-gradient(0deg, #f4f4f4 5%, #fafafa 95%);
@@ -88,13 +88,13 @@ export default {
       img {
         width: 3.2rem;
         height: 2.133333rem;
-        margin-right:.533333rem;
+        margin-right: 0.533333rem;
       }
-     .swiper-pagination-bullet{
-    width: .24rem;
-    height: .04rem;
-    border-radius: 0;
-     }
+      .swiper-pagination-bullet {
+        width: 0.24rem;
+        height: 0.04rem;
+        border-radius: 0;
+      }
     }
   }
   #combo_swipre {

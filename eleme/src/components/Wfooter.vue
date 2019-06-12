@@ -43,6 +43,7 @@ export default {
 @import "../assets/iconfont/iconfont.css";
 @import "../assets/iconfont/demo.css";
 nav {
+  z-index: 999;
   width: 100%;
   height: 1.2rem;
   padding-top: 0.4rem;
