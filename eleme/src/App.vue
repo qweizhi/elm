@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
    <router-view></router-view>    
    <wfooter/>
   </div>
@@ -16,8 +15,4 @@ export default {
 
 <style lang="scss">
 @import "./assets/css/base.css";
-* {
-  padding: 0px;
-  margin: 0px;
-}
 </style>
