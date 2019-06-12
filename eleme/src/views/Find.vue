@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="find">
     <Fheader/>
     <Frecommend/>
     <Fmore/>
@@ -34,6 +34,10 @@ html {
   touch-action: manipulation;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
+}
+.find {
+  margin-bottom: 60px;
+  padding-bottom: 20px;
 }
 </style>
 

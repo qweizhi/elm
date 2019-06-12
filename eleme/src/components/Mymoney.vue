@@ -3,17 +3,13 @@
     <section>
       <a href="javascript:;" class="index-1ryAh">
         <p>
-          <svg fill="#ff5f3e">
-            <use xlink:href="#luckybag"></use>
-          </svg>
+          <i class="iconfont icon-dianzan"></i>
         </p>
         <p class="index-3S6cZ">红包</p>
       </a>
       <a href="javascript:;" class="index-1ryAh">
         <p>
-          <svg fill="#6ac20b">
-            <use xlink:href="#profile-coins"></use>
-          </svg>
+          <i class="iconfont icon-dianzan"></i>
         </p>
         <p class="index-3S6cZ">金币</p>
       </a>
@@ -28,7 +24,6 @@ section {
   display: table;
   width: 100%;
   height: 2.24rem;
-  border-bottom: 1px solid #ddd;
   background-color: #fff;
   a.index-1ryAh {
     display: table-cell;
