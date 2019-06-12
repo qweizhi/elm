@@ -37,16 +37,15 @@ export default {
         }
       }
     );
-    console.log(data[0].entries);
     this.arrbefor = data[0].entries.slice(0, 10);
     this.arrafter = data[0].entries.slice(10, -1);
-    console.log(this.arrbefor);
   },
   mounted: function() {
     var swiper = new Swiper(".swiper-container", {
       pagination: {
         el: ".swiper-pagination"
-      }
+      },
+      loop: true
     });
   }
 };
