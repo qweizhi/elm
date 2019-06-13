@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-   <router-view></router-view>    
-   <wfooter/>
+    <!-- 没登录显示部分 -->
+
+    
+    <router-view/>
+    <wfooter/>
+
   </div>
 </template>
 <script>
