@@ -1,18 +1,34 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+   <wheader/>
+   <winp/>
+   <wclassify/>
+   <wcombo/>
+   <wsort/>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+<script>
+import wheader from "@/components/Wheader.vue"; // @ is an alias to /src
+import winp from "@/components/Winp.vue"; // @ is an alias to /src
+import wclassify from "@/components/Wclassify.vue";
+import wcombo from "@/components/Wcombo.vue";
+import wsort from "@/components/Wsort.vue";
 
-@Component({
+export default {
   components: {
-    HelloWorld,
-  },
-})
-export default class Home extends Vue {}
+    wheader,
+    winp,
+    wclassify,
+    wcombo,
+    wsort
+  }
+};
 </script>
+<style lang="scss" scoped>
+.home {
+  margin-bottom: 1.6rem;
+}
+</style>
+
+
