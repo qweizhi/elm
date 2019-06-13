@@ -7,7 +7,7 @@
             <ul class="sort_item_w">
                 <li>
                     <a to="/home/ranking" @click="ranking_show_zong">
-                    综合排序
+                  {{zong_w_inner}}
                     </a>
                     <span></span>
                 </li>
@@ -23,7 +23,7 @@
             <div class="ranking">
                <div class="ranking_box_w1" v-show="ranking_w1_isok">
                   <ul>
-                    <li v-for="(s,i) in arr" :key="i" :style="`color:${i==ranking_cur?'#3190e8':''}`" @click="ranking_click(i)">
+                    <li v-for="(s,i) in arr" :key="i" :style="`color:${i==ranking_cur?'#3190e8':''}`" @click="ranking_click(i,s.name)">
                       {{s.name}}
                   <img :style="`display:${i==ranking_cur?'block':'none'}`" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAkFJREFUSA3tlbtrVFEQxr/JusEkdqYR0mU3EGyECCKCIEIghIgSfBSCCkbwWqTQykoQ41+QbHaRRC0MSDCgjeADO0ERQRBB10YsU/gC89jd8ZuNez17H7gmN2BxT7Fnzpw587vzzbl3gXSkCqQKJKSAJJQnlKb3huawjDkCZj94KIiIukGbAs5P636t4h5J2w1GyHz5ghx1wW3uIgm7b0pPaQ2PHOg3tGEimDsxsKpKbkonqoqbqmivgwRLksFI+by8DoITkXqgqJ1fq7hN4GgDwMQVajxa9uR+w+fOW9zFeuz+ou74UoEl3+2fFyilPPs+BmpxkVLnpnVvflLHTT4/WYSRL+mu1QpecOsPlAseukTorYgjviuU2F4DWcFzytbNqCfSjtPlMfnsn/htsJ+HoLjDS9Tl7ongOuW97Pqi7FDFslzvlUFtHNRVvOkr6Im15dpvb0Ev8sEWglCWWmoFallCFeeLuqdWxVNW0+nCaM9JB8bxE9cIHAvsWaL5kx6OXxGpBfei1iGwBeUmdYTdXSA84x6ijCv+q9K0gcdbuzH89hib1OIISW3n+JV5wMkL5oiBviT0yL9ALW8k2DY+elLidNXsuEEF3mW7METoj7iYOH+k1G4wb+8MKz3j+uq24JNksS/qxodiIxyxFTdie/pxjk/3sLG2mZUu8sszuF5oPYebMM7eeVe3LS3iGS/bAKHfeasPsBWv4uJb8f+1YktiPezIYth6mhEc3ii0lQdriuGfQbbJkS5SBf5HBX4Bvl6o9YDxgOsAAAAASUVORK5CYII=" class="selected_w">
                     </li>
@@ -107,7 +107,8 @@ export default {
       ranking_cur: -1, //点击综合排序样式
       ranking_w1_isok: false,
       ranking_w2_isok: false,
-      ranking_box_isok: false
+      ranking_box_isok: false,
+      zong_w_inner: "综合排序"
     };
   },
   async created() {
@@ -176,13 +177,16 @@ export default {
       //字符串里插字符串
       return soure.slice(0, start) + newStr + soure.slice(start);
     },
-    ranking_click(index) {
+    ranking_click(index, item) {
+      this.zong_w_inner = item;
       this.ranking_cur = index;
       this.ranking_box_isok = false;
       this.ranking_w1_isok = false;
       this.$store.state.mark_isok = !this.$store.state.mark_isok; //遮罩层
       if (this.$store.state.mark_isok) this.stop();
       if (this.$store.state.mark_isok == false) this.move();
+      //点击排序
+      if (item == "好评优先") console.log(214321);
     },
     ranking_show_zong() {
       this.ranking_box_isok = !this.ranking_box_isok; //大盒子
