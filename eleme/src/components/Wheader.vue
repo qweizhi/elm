@@ -1,13 +1,19 @@
 <template>
     <div class="header">
-        <div class="dingwei">
+        <div class="dingwei" @click="city_dw">
             <i class="iconfont icon-dingwei"></i>
             <span>广东省军供大厦(北京路店)</span>
         </div>
     </div>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    city_dw() {
+      this.$store.commit("load_left");
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

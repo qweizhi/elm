@@ -7,8 +7,6 @@ import "lib-flexible/flexible";
 import axios from "axios";
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
-// import VueScroller from "vue-scroller";
-// Vue.use(VueScroller);
 new Vue({
   router,
   store,

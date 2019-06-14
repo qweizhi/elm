@@ -2,6 +2,7 @@
   <div class="home">
      <div class="ranking_mark" v-show="count"></div>
    <wheader/>
+   <wlocation/>
    <winp/>
    <wclassify/>
    <wcombo/>
@@ -15,13 +16,16 @@ import winp from "@/components/Winp.vue"; // @ is an alias to /src
 import wclassify from "@/components/Wclassify.vue";
 import wcombo from "@/components/Wcombo.vue";
 import wsort from "@/components/Wsort.vue";
+import wlocation from "./Wlocation.vue";
+
 export default {
   components: {
     wheader,
     winp,
     wclassify,
     wcombo,
-    wsort
+    wsort,
+    wlocation
   },
   computed: {
     count() {

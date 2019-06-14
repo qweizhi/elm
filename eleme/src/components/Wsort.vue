@@ -108,7 +108,8 @@ export default {
       ranking_w1_isok: false,
       ranking_w2_isok: false,
       ranking_box_isok: false,
-      zong_w_inner: "综合排序"
+      zong_w_inner: "综合排序",
+      sort_w_g: "" //根据数值排序
     };
   },
   async created() {
@@ -120,7 +121,7 @@ export default {
         }
       }
     );
-    console.log(data.outside);
+    // console.log(data.outside);
     // console.log(data.outside[0].items.restaurant.business_info);
     this.arr = data.outside.inside_sort_filter;
     this.cookie_name = this.getCookie(name);
@@ -154,10 +155,10 @@ export default {
           }
         }
       );
-      console.log(item_data.data.data);
-      console.log(
-        item_data.data.data[0].items.restaurant.piecewise_agent_fee.rules[0]
-      );
+      // console.log(item_data.data.data);
+      // console.log(
+      //   item_data.data.data[0].items.restaurant.piecewise_agent_fee.rules[0]
+      // );
       this.sort_item_w = [...this.sort_item_w, ...item_data.data.data];
     },
     getCookie: function(c_name) {
@@ -186,7 +187,6 @@ export default {
       if (this.$store.state.mark_isok) this.stop();
       if (this.$store.state.mark_isok == false) this.move();
       //点击排序
-      if (item == "好评优先") console.log(214321);
     },
     ranking_show_zong() {
       this.ranking_box_isok = !this.ranking_box_isok; //大盒子
