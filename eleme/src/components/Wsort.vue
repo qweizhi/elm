@@ -106,16 +106,6 @@ export default {
     // console.log(sorts);
     this.arr = data.outside.outside_sort_filter;
     this.cookie_name = this.getCookie(name);
-    // let item_data = await this.$axios.get(
-    //   "https://www.easy-mock.com/mock/5cfa2149b68e235523092660/example/item",
-    //   {
-    //     params: {
-    //       ID: 12345
-    //     }
-    //   }
-    // );
-    // console.log(item_data.data);
-    // this.sort_item_w = item_data.data.data.items;
     this.init();
   },
   methods: {
