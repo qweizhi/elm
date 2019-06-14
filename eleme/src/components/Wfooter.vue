@@ -1,10 +1,16 @@
 <template>
-<nav v-if="isshowFooter">
-<a class="foot_item" v-for="(t,index) in footlist" :key="index" :class="{'cur':cur_num==index}" @click="cur_click(index)">
-    <i class="iconfont" :class="t.icon"></i>
-    <span v-text="t.title"></span>
-</a>
-</nav>
+  <nav v-if="isshowFooter">
+    <a
+      class="foot_item"
+      v-for="(t,index) in footlist"
+      :key="index"
+      :class="{'cur':cur_num==index}"
+      @click="cur_click(index)"
+    >
+      <i class="iconfont" :class="t.icon"></i>
+      <span v-text="t.title"></span>
+    </a>
+  </nav>
 </template>
 <script>
 export default {
@@ -13,19 +19,23 @@ export default {
       footlist: [
         {
           title: "首页",
-          icon: "icon-shouye"
+          icon: "icon-shouye",
+          url: "home"
         },
         {
           title: "发现",
-          icon: "icon-faxian"
+          icon: "icon-faxian",
+          url: "find"
         },
         {
           title: "订单",
-          icon: "icon-tianchongxing-"
+          icon: "icon-tianchongxing-",
+          url: "order"
         },
         {
           title: "我的",
-          icon: "icon-weibiaoti-_huabanfuben"
+          icon: "icon-weibiaoti-_huabanfuben",
+          url: "my"
         }
       ],
       cur_num: 0
@@ -34,12 +44,21 @@ export default {
   methods: {
     cur_click(index) {
       this.cur_num = index;
-    } //获取cookie
+      // index 你点击的当前所在位置
+      // console.log(index);
+      // router.push(...)
+      // 编程式导航，代替了传统的<router-link>
+      this.$router.push({
+        //path
+        name: this.footlist[index].url
+      });
+      //记录位置
+    }
   },
 
   computed: {
-    isshowFooter(){
-      return this.$store.state.isFooter
+    isshowFooter() {
+      return this.$store.state.isFooter;
     }
   }
 };
