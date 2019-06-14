@@ -5,6 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    // 决定头部是否出现
+    isShop: true,
+    isFooter: true,
+    onl: 0,
+    isshopTab: true,
     mark_isok: false, //遮罩
     city: "", //接受城市值
     load_left: "100%",

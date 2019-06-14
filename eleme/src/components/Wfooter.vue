@@ -1,5 +1,5 @@
 <template>
-<nav>
+<nav v-if="isshowFooter">
 <a class="foot_item" v-for="(t,index) in footlist" :key="index" :class="{'cur':cur_num==index}" @click="cur_click(index)">
     <i class="iconfont" :class="t.icon"></i>
     <span v-text="t.title"></span>
@@ -35,6 +35,12 @@ export default {
     cur_click(index) {
       this.cur_num = index;
     } //获取cookie
+  },
+
+  computed: {
+    isshowFooter(){
+      return this.$store.state.isFooter
+    }
   }
 };
 </script>
@@ -43,7 +49,6 @@ export default {
 @import "../assets/iconfont/iconfont.css";
 @import "../assets/iconfont/demo.css";
 nav {
-  z-index: 1001;
   width: 100%;
   height: 1.2rem;
   padding-top: 0.4rem;
