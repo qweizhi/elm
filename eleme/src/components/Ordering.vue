@@ -238,12 +238,12 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 
 export default Vue.extend({
   data() {
     return {
-      la: "",
+      la: '',
       num: 0,
       qty: 0,
       ki: 0,
@@ -251,7 +251,7 @@ export default Vue.extend({
       shopList: [],
       xinList: [],
       orderList: [],
-      oh: false
+      oh: false,
       // shoplist = ['https://www.easy-mock.com/mock/5cf66494c51c246c3655bfca/example/dianpushop'],
       // '
     };
@@ -262,7 +262,7 @@ export default Vue.extend({
   methods: {
     async getshopList() {
       const data1 = await this.$axios(
-        "https://www.easy-mock.com/mock/5cf66494c51c246c3655bfca/example/shop_list"
+        'https://www.easy-mock.com/mock/5cf66494c51c246c3655bfca/example/shop_list',
       );
       // console.log(data1.data.menu);
       this.shopList = data1.data.menu;
@@ -270,10 +270,10 @@ export default Vue.extend({
     // 点击展开、拿数据
     Skip(idx) {
       this.oh = true;
-      this.$refs.userinfo.style.display = "block";
+      this.$refs.userinfo.style.display = 'block';
       // this.num = idx;
       // console.log(idx);
-      this.shopList.forEach(item => {
+      this.shopList.forEach((item) => {
         if (item.id === idx) {
           this.xinList = item;
           console.log(this.xinList);
@@ -285,7 +285,7 @@ export default Vue.extend({
     // 点击关闭
     specpanel() {
       this.oh = false;
-      this.$refs.userinfo.style.display = "none";
+      this.$refs.userinfo.style.display = 'none';
     },
     // 点击选中
     lop(idx, p) {
@@ -304,11 +304,11 @@ export default Vue.extend({
     select(a, b, c) {
       // 制返
       this.oh = false;
-      this.$refs.userinfo.style.display = "none";
+      this.$refs.userinfo.style.display = 'none';
       this.orderList.push(a, b, c, this.la);
       // console.log(this.orderList);
-    }
-  }
+    },
+  },
 });
 </script>
 
