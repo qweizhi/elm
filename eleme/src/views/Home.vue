@@ -15,6 +15,7 @@ import winp from "@/components/Winp.vue"; // @ is an alias to /src
 import wclassify from "@/components/Wclassify.vue";
 import wcombo from "@/components/Wcombo.vue";
 import wsort from "@/components/Wsort.vue";
+import wlocation from "@/views/Wlocation.vue";
 
 export default {
   components: {
@@ -22,7 +23,8 @@ export default {
     winp,
     wclassify,
     wcombo,
-    wsort
+    wsort,
+    wlocation
   }
 };
 </script>
