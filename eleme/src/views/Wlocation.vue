@@ -1,20 +1,19 @@
 <template>
     <div class="location" :style="{'right':'-'+load_left,'left':load_left}">
         <wautonavi/>
-        <winautonavi/>
-        <wcitySelection/>
+        <wcity/>
     </div>
 </template>
 <script>
 import wautonavi from "@/components/Wautonavi.vue";
 import winautonavi from "@/components/Winautonavi.vue";
-import wcitySelection from "@/components/WcitySelection.vue";
+import wcity from "@/views/Wcity.vue";
 
 export default {
   components: {
     wautonavi,
     winautonavi,
-    wcitySelection
+    wcity
   },
   computed: {
     load_left: function() {

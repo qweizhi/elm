@@ -37,13 +37,13 @@ export default {
           icon: "icon-weibiaoti-_huabanfuben",
           url: "my"
         }
-      ],
-      cur_num: 0
+      ]
     };
   },
   methods: {
     cur_click(index) {
-      this.cur_num = index;
+      this.$store.state.cur_num = index;
+      console.log(this.$store.state.cur_num);
       // index 你点击的当前所在位置
       // console.log(index);
       // router.push(...)
@@ -59,6 +59,9 @@ export default {
   computed: {
     isshowFooter() {
       return this.$store.state.isFooter;
+    },
+    cur_num() {
+      return this.$store.state.cur_num;
     }
   }
 };
@@ -75,7 +78,7 @@ nav {
   left: 0px;
   bottom: 0px;
   display: flex;
-  z-index: 999px;
+  z-index: 999;
   background: #fff;
   box-shadow: 0 -0.026667rem 0.053333rem rgba(0, 0, 0, 0.1);
   .foot_item {

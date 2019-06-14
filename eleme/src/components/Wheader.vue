@@ -2,12 +2,24 @@
     <div class="header">
         <div class="dingwei" @click="city_dw">
             <i class="iconfont icon-dingwei"></i>
-            <span>广东省军供大厦(北京路店)</span>
+            <span>{{`${get_city?get_city:'未知位置'}`}}</span>
         </div>
     </div>
 </template>
 <script>
 export default {
+  computed: {
+    get_city() {
+      return this.$store.state.get_city;
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      if (this.$store.state.get_city == "") {
+        this.$store.commit("load_left");
+      }
+    }, 2000);
+  },
   methods: {
     city_dw() {
       this.$store.commit("load_left");

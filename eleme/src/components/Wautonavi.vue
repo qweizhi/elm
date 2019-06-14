@@ -2,32 +2,23 @@
   <div class="autonavi_w">
     <div class="autonavi_w_header">
       <i @click="city_dw">&lt;</i>
-      <h2>选择收货地址</h2>
+      <h2>{{autonaviHeader}}</h2>
     </div>
   </div>
 </template>
 <script>
-import getCurrentCityName from "../getUserLocation.js"; //高德地图地理位置
 export default {
+  computed: {
+    autonaviHeader() {
+      return this.$store.state.autonaviHeader;
+    }
+  },
   methods: {
-    /**获取地图定位*/
-    getCurrentCity() {
-      console.log(getCurrentCityName());
-      this.$store.state.city ||
-        getCurrentCityName().then(city => {
-          console.log(city);
-          city = city.slice(0, city.length - 1);
-          this.$store.commit("getCity", city);
-        });
-    },
     city_dw() {
       this.$store.commit("load_left");
       this.$store.state.inauto_isok = false;
     }
   }
-  // mounted() {
-  //   // this.getCurrentCity(); // 调用获取地理位置
-  // }
 };
 </script>
 <style lang="scss" scoped>
@@ -35,6 +26,7 @@ export default {
   position: sticky;
   left: 0px;
   top: 0px;
+  z-index: 1000;
   .autonavi_w_header {
     position: relative;
     width: 100%;

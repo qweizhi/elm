@@ -2,16 +2,16 @@
     <div class="city_sel_box" v-show="inauto_isok">
     <div class="city_sel_w">
         <i class="iconfont icon-sousuo"></i>
-        <input type="text" placeholder="输入城市名或拼音">
+        <input type="text" placeholder="输入城市名或拼音" v-focus v-model="py" @keydown="city_inp_down(py)">
     </div>
     <div class="gou_w">
-      <h3  class="cur_c">
+      <h3  class="cur_c" v-show="item_city_isok">
         当前定位城市
       </h3>
-      <p  class="cur_f" style="margin-left:0px;text-indent:1em;">酒泉</p>
+      <p v-show="item_city_isok"  class="cur_f" style="margin-left:0px;text-indent:1em;">{{city}}</p>
       <dl class="" v-for="(item,index) in arr" :key="index">
       <dt v-text="item.initial"  class="cur_c"></dt>
-      <dd v-for="(t,ind) in item.list" :key="ind"  class="cur_f">{{t.name}}</dd>
+      <dd v-for="(t,ind) in item.list" :key="ind"  class="cur_f" @click="city_item_f(t.name)">{{t.name}}</dd>
       </dl>
     </div>
     <div class="city-2_cDS_0"  v-show="inauto_isok">
@@ -23,15 +23,23 @@
 export default {
   data() {
     return {
-      arr: ""
+      arr: "",
+      py: ""
     };
   },
   computed: {
     inauto_isok() {
       return this.$store.state.inauto_isok;
+    },
+    item_city_isok() {
+      return this.$store.state.item_city_isok;
+    },
+    city() {
+      return this.$store.state.city;
     }
   },
   async created() {
+    this.$store.commit("item_city_isok");
     let { data } = await this.$axios.get(
       "https://www.easy-mock.com/mock/5cfa2149b68e235523092660/example/city",
       {
@@ -42,6 +50,26 @@ export default {
     );
     console.log(data);
     this.arr = data.city;
+  },
+  methods: {
+    city_item_f(item) {
+      this.$store.commit("city_num_g", item);
+      this.$store.commit("load_left");
+      this.$store.commit("inauto_isok");
+    },
+    city_inp_down(py_num) {
+      this.arr.forEach(item => {
+        console.log(item);
+        item.list.forEach(t => {
+          // console.log(t.pinyin.toLocaleLowerCase());
+        });
+      });
+    }
+  },
+  directives: {
+    focus(el) {
+      el.focus();
+    }
   }
 };
 </script>
