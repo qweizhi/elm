@@ -53,7 +53,10 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './components/Order.vue'),
+      // component: () => import(/* webpackChunkName: "about" */ './components/Order.vue'),
+      // 路由懒加载
+      component: resolve =>require(['@/components/Order'], resolve),
+
     },
     {
       path: '/lineItem',
@@ -79,6 +82,23 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './components/Merchant.vue'),
     },
+    {
+      path: '/shopfooter',
+      name: 'shopfooter',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './components/ShopFooter.vue'),
+    },
+    {
+      path: '/affirm',
+      name: 'affirm',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/Affirm.vue'),
+    },
+
 
 
   ],

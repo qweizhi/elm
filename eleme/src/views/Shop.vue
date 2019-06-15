@@ -43,6 +43,8 @@ import ShopFooter from '@/components/ShopFooter.vue';
         this.$store.state.isshopTab = false;
       }
     };
+
+
   },
   computed: {
     onl() {

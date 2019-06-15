@@ -9,10 +9,20 @@ export default new Vuex.Store({
     isShop : true,
     onl: 0,
     isshopTab : true,
+    // 决定loading是否出现
+    loading: 0,
+    // 1.建立空数组
+    orderList : [],
+    qty : 0,
 
   },
   mutations: {
-
+    addItem(state, value) {
+      state.orderList.push(value);
+    },
+    addqty(state, value) {
+      state.qty;
+    },
   },
   actions: {
 
