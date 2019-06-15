@@ -43,7 +43,6 @@ export default {
   methods: {
     cur_click(index) {
       this.$store.state.cur_num = index;
-      console.log(this.$store.state.cur_num);
       // index 你点击的当前所在位置
       // console.log(index);
       // router.push(...)
@@ -78,7 +77,7 @@ nav {
   left: 0px;
   bottom: 0px;
   display: flex;
-  z-index: 999;
+  z-index: 1000;
   background: #fff;
   box-shadow: 0 -0.026667rem 0.053333rem rgba(0, 0, 0, 0.1);
   .foot_item {

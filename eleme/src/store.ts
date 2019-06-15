@@ -17,7 +17,12 @@ export default new Vuex.Store({
     autonaviHeader: "选择收货地址",
     item_city_isok: false,
     get_city: "",
-    cur_num: 0 //底部选项卡高亮
+    cur_num: 0, //底部选项卡高亮
+    filter_city: 1, //城市过滤器开关
+    city_end_isok: false, //城市搜索无结果开关
+    loading_isok: true,
+    load_zheng: false,
+    cookie_name: false //cookit有无
   },
   mutations: {
     getCity(state, citynum) {

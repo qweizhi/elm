@@ -1,7 +1,8 @@
 <template>
   <div class="autonavi_w">
     <div class="autonavi_w_header">
-      <i @click="city_dw">&lt;</i>
+      <svg  @click="city_dw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 33" class="index-11GLi_0" data-spm-anchor-id="a2ogi.12117543.0.i20"><path fill-rule="evenodd" d="M17.655 1.853L15.961.159.033 16.072 15.961 32l1.694-1.694L3.429 16.08 17.655 1.854z" class="path1"></path></svg>
+
       <h2>{{autonaviHeader}}</h2>
     </div>
   </div>
@@ -42,10 +43,18 @@ export default {
     background-image: linear-gradient(90deg, #0af, #0085ff);
     text-align: center;
 
-    i {
-      font-size: 0.866667rem;
+    // i {
+    //   font-size: 0.866667rem;
+    //   position: absolute;
+    //   left: 0.533333rem;
+    // }
+    .index-11GLi_0 {
       position: absolute;
-      left: 0.533333rem;
+      left: 0.333333rem;
+      top: 0.333333rem;
+      fill: #fff;
+      width: 0.533333rem;
+      height: 0.533333rem;
     }
     h2 {
       text-align: center;

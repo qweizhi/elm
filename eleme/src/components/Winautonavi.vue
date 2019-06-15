@@ -45,6 +45,9 @@ export default {
   data() {
     return { num: "" };
   },
+  created() {
+    this.num = this.$store.state.get_city; //实时存贮定位值
+  },
   computed: {
     inauto_isok() {
       return this.$store.state.inauto_isok;
@@ -75,10 +78,8 @@ export default {
         });
     },
     dingwei_click(item) {
-      console.log(item);
       this.$store.commit("load_left");
       this.$store.state.get_city = item;
-      console.log(this.$store.state.get_city);
     }
   },
   directives: {
