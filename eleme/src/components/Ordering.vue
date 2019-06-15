@@ -309,7 +309,6 @@ export default Vue.extend({
     // 左侧选项卡
     kie(idx) {
       this.ki = idx;
-
     },
     // 选好了 订单信息
     select(a, b, c) {

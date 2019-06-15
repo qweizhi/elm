@@ -15,7 +15,7 @@ export default {
     Mymoney,
     Mysite
   }
-};
+}
 </script>
 <style lang="scss">
 html {

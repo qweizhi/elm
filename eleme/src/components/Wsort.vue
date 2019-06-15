@@ -4,9 +4,11 @@
             推荐商家
         </h2>
         <div class="sort-w-box">
-            <ul>
+            <ul class="sort_item_w">
                 <li>
-                    <a>综合排序</a>
+                    <a to="/home/ranking" @click="ranking_show_zong">
+                  {{zong_w_inner}}
+                    </a>
                     <span></span>
                 </li>
                 <li>
@@ -14,11 +16,25 @@
                 </li>
                 <li>品质联盟</li>
                 <li>
-                    <b>筛选</b>
+                    <a to="/screen">筛选</a>
                       <i class="iconfont icon-shaixuan"></i>
                 </li>
             </ul>
+            <div class="ranking">
+               <div class="ranking_box_w1" v-show="ranking_w1_isok">
+                  <ul>
+                    <li v-for="(s,i) in arr" :key="i" :style="`color:${i==ranking_cur?'#3190e8':''}`" @click="ranking_click(i,s.name)">
+                      {{s.name}}
+                  <img :style="`display:${i==ranking_cur?'block':'none'}`" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAkFJREFUSA3tlbtrVFEQxr/JusEkdqYR0mU3EGyECCKCIEIghIgSfBSCCkbwWqTQykoQ41+QbHaRRC0MSDCgjeADO0ERQRBB10YsU/gC89jd8ZuNez17H7gmN2BxT7Fnzpw587vzzbl3gXSkCqQKJKSAJJQnlKb3huawjDkCZj94KIiIukGbAs5P636t4h5J2w1GyHz5ghx1wW3uIgm7b0pPaQ2PHOg3tGEimDsxsKpKbkonqoqbqmivgwRLksFI+by8DoITkXqgqJ1fq7hN4GgDwMQVajxa9uR+w+fOW9zFeuz+ou74UoEl3+2fFyilPPs+BmpxkVLnpnVvflLHTT4/WYSRL+mu1QpecOsPlAseukTorYgjviuU2F4DWcFzytbNqCfSjtPlMfnsn/htsJ+HoLjDS9Tl7ongOuW97Pqi7FDFslzvlUFtHNRVvOkr6Im15dpvb0Ev8sEWglCWWmoFallCFeeLuqdWxVNW0+nCaM9JB8bxE9cIHAvsWaL5kx6OXxGpBfei1iGwBeUmdYTdXSA84x6ijCv+q9K0gcdbuzH89hib1OIISW3n+JV5wMkL5oiBviT0yL9ALW8k2DY+elLidNXsuEEF3mW7METoj7iYOH+k1G4wb+8MKz3j+uq24JNksS/qxodiIxyxFTdie/pxjk/3sLG2mZUu8sszuF5oPYebMM7eeVe3LS3iGS/bAKHfeasPsBWv4uJb8f+1YktiPezIYth6mhEc3ii0lQdriuGfQbbJkS5SBf5HBX4Bvl6o9YDxgOsAAAAASUVORK5CYII=" class="selected_w">
+                    </li>
+                  </ul>
+              </div>
+              <div class="ranking_box_w2" v-show="ranking_w2_isok">
+
+              </div>
+            </div>
         </div>
+      
         <div class="login-w-m" v-if="cookie_name">
             <img src="https://fuss10.elemecdn.com/d/60/70008646170d1f654e926a2aaa3afpng.png" alt="">
             <h3>没有结果</h3>
@@ -28,23 +44,24 @@
 
         <div class="list_e_w">
           <div class="item_w clearfix" v-for="(k,ind) in sort_item_w" :key="ind">
-            <img class="item_img1_w fl" :src="`https://fuss10.elemecdn.com/${insertStr(insertStr(k.restaurant.image_path,1,'/'),4,'/').slice(-3) =='png'?insertStr(insertStr(k.restaurant.image_path,1,'/'),4,'/')+'.png':insertStr(insertStr(k.restaurant.image_path,1,'/'),4,'/') + '.jpeg'}`" alt="">
+            <img class="item_img1_w fl" :src="`https://fuss10.elemecdn.com/${insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/').slice(-3) =='png'?insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/')+'.png':insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/') + '.jpeg'}`" alt="">
             <div class="item_w_lt fr">
               <section class="content_1_w clearfix">
-                <h3 class="fl" v-text="k.restaurant.name">
+                <h3 class="fl" v-text="k.items.restaurant.name">
               </h3>
                <span class="fr">···</span>
               </section>
               <section class="content_2_w">
-                 <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTU0LjAxNyA4LjA3MmwtMi41NTIgMS41NjFjLS40NzYuMjkxLS43NTguMDk2LS42MjYtLjQ1NWwuNjk2LTIuOTA5LTIuMjczLTEuOTQ0Yy0uNDI0LS4zNjItLjMyNS0uNjkxLjIzOS0uNzM2bDIuOTgyLS4yMzdMNTMuNjMuNTg5Yy4yMTMtLjUxNS41NTctLjUyMy43NzQgMGwxLjE0NiAyLjc2MyAyLjk4Mi4yMzdjLjU1Ni4wNDQuNjcuMzY4LjI0LjczNmwtMi4yNzQgMS45NDQuNjk2IDIuOTFjLjEzLjU0Mi0uMTQzLjc1LS42MjYuNDU0bC0yLjU1MS0xLjU2em0tNDggMEwzLjQ2NSA5LjYzM2MtLjQ3Ni4yOTEtLjc1OC4wOTYtLjYyNi0uNDU1bC42OTYtMi45MDktMi4yNzMtMS45NDRjLS40MjQtLjM2Mi0uMzI1LS42OTEuMjM5LS43MzZsMi45ODItLjIzN0w1LjYzLjU4OWMuMjEzLS41MTUuNTU3LS41MjMuNzc0IDBMNy41NSAzLjM1MmwyLjk4Mi4yMzdjLjU1Ni4wNDQuNjcuMzY4LjI0LjczNkw4LjQ5NyA2LjI2OWwuNjk2IDIuOTFjLjEzLjU0Mi0uMTQzLjc1LS42MjYuNDU0bC0yLjU1MS0xLjU2em0xMiAwbC0yLjU1MiAxLjU2MWMtLjQ3Ni4yOTEtLjc1OC4wOTYtLjYyNi0uNDU1bC42OTYtMi45MDktMi4yNzMtMS45NDRjLS40MjQtLjM2Mi0uMzI1LS42OTEuMjM5LS43MzZsMi45ODItLjIzN0wxNy42My41ODljLjIxMy0uNTE1LjU1Ny0uNTIzLjc3NCAwbDEuMTQ2IDIuNzYzIDIuOTgyLjIzN2MuNTU2LjA0NC42Ny4zNjguMjQuNzM2bC0yLjI3NCAxLjk0NC42OTYgMi45MWMuMTMuNTQyLS4xNDMuNzUtLjYyNi40NTRsLTIuNTUxLTEuNTZ6bTEyIDBsLTIuNTUyIDEuNTYxYy0uNDc2LjI5MS0uNzU4LjA5Ni0uNjI2LS40NTVsLjY5Ni0yLjkwOS0yLjI3My0xLjk0NGMtLjQyNC0uMzYyLS4zMjUtLjY5MS4yMzktLjczNmwyLjk4Mi0uMjM3TDI5LjYzLjU4OWMuMjEzLS41MTUuNTU3LS41MjMuNzc0IDBsMS4xNDYgMi43NjMgMi45ODIuMjM3Yy41NTYuMDQ0LjY3LjM2OC4yNC43MzZsLTIuMjc0IDEuOTQ0LjY5NiAyLjkxYy4xMy41NDItLjE0My43NS0uNjI2LjQ1NGwtMi41NTEtMS41NnptMTIgMGwtMi41NTIgMS41NjFjLS40NzYuMjkxLS43NTguMDk2LS42MjYtLjQ1NWwuNjk2LTIuOTA5LTIuMjczLTEuOTQ0Yy0uNDI0LS4zNjItLjMyNS0uNjkxLjIzOS0uNzM2bDIuOTgyLS4yMzdMNDEuNjMuNTg5Yy4yMTMtLjUxNS41NTctLjUyMy43NzQgMGwxLjE0NiAyLjc2MyAyLjk4Mi4yMzdjLjU1Ni4wNDQuNjcuMzY4LjI0LjczNmwtMi4yNzQgMS45NDQuNjk2IDIuOTFjLjEzLjU0Mi0uMTQzLjc1LS42MjYuNDU0bC0yLjU1MS0xLjU2eiIgZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+" alt="">
-                 <span v-text="k.restaurant.rating"></span>
-                 <span>月售680单</span>
+                 <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IHgxPSIwJSIgeTE9IjUwJSIgeTI9IjUwJSIgaWQ9ImEiPjxzdG9wIHN0b3AtY29sb3I9IiNGRkRFMDAiIG9mZnNldD0iMCUiLz48c3RvcCBzdG9wLWNvbG9yPSIjRkZCMDAwIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBkPSJNNTQuMDE3IDguMDcybC0yLjU1MiAxLjU2MWMtLjQ3Ni4yOTEtLjc1OC4wOTYtLjYyNi0uNDU1bC42OTYtMi45MDktMi4yNzMtMS45NDRjLS40MjQtLjM2Mi0uMzI1LS42OTEuMjM5LS43MzZsMi45ODItLjIzN0w1My42My41ODljLjIxMy0uNTE1LjU1Ny0uNTIzLjc3NCAwbDEuMTQ2IDIuNzYzIDIuOTgyLjIzN2MuNTU2LjA0NC42Ny4zNjguMjQuNzM2bC0yLjI3NCAxLjk0NC42OTYgMi45MWMuMTMuNTQyLS4xNDMuNzUtLjYyNi40NTRsLTIuNTUxLTEuNTZ6bS00OCAwTDMuNDY1IDkuNjMzYy0uNDc2LjI5MS0uNzU4LjA5Ni0uNjI2LS40NTVsLjY5Ni0yLjkwOS0yLjI3My0xLjk0NGMtLjQyNC0uMzYyLS4zMjUtLjY5MS4yMzktLjczNmwyLjk4Mi0uMjM3TDUuNjMuNTg5Yy4yMTMtLjUxNS41NTctLjUyMy43NzQgMEw3LjU1IDMuMzUybDIuOTgyLjIzN2MuNTU2LjA0NC42Ny4zNjguMjQuNzM2TDguNDk3IDYuMjY5bC42OTYgMi45MWMuMTMuNTQyLS4xNDMuNzUtLjYyNi40NTRsLTIuNTUxLTEuNTZ6bTEyIDBsLTIuNTUyIDEuNTYxYy0uNDc2LjI5MS0uNzU4LjA5Ni0uNjI2LS40NTVsLjY5Ni0yLjkwOS0yLjI3My0xLjk0NGMtLjQyNC0uMzYyLS4zMjUtLjY5MS4yMzktLjczNmwyLjk4Mi0uMjM3TDE3LjYzLjU4OWMuMjEzLS41MTUuNTU3LS41MjMuNzc0IDBsMS4xNDYgMi43NjMgMi45ODIuMjM3Yy41NTYuMDQ0LjY3LjM2OC4yNC43MzZsLTIuMjc0IDEuOTQ0LjY5NiAyLjkxYy4xMy41NDItLjE0My43NS0uNjI2LjQ1NGwtMi41NTEtMS41NnptMTIgMGwtMi41NTIgMS41NjFjLS40NzYuMjkxLS43NTguMDk2LS42MjYtLjQ1NWwuNjk2LTIuOTA5LTIuMjczLTEuOTQ0Yy0uNDI0LS4zNjItLjMyNS0uNjkxLjIzOS0uNzM2bDIuOTgyLS4yMzdMMjkuNjMuNTg5Yy4yMTMtLjUxNS41NTctLjUyMy43NzQgMGwxLjE0NiAyLjc2MyAyLjk4Mi4yMzdjLjU1Ni4wNDQuNjcuMzY4LjI0LjczNmwtMi4yNzQgMS45NDQuNjk2IDIuOTFjLjEzLjU0Mi0uMTQzLjc1LS42MjYuNDU0bC0yLjU1MS0xLjU2em0xMiAwbC0yLjU1MiAxLjU2MWMtLjQ3Ni4yOTEtLjc1OC4wOTYtLjYyNi0uNDU1bC42OTYtMi45MDktMi4yNzMtMS45NDRjLS40MjQtLjM2Mi0uMzI1LS42OTEuMjM5LS43MzZsMi45ODItLjIzN0w0MS42My41ODljLjIxMy0uNTE1LjU1Ny0uNTIzLjc3NCAwbDEuMTQ2IDIuNzYzIDIuOTgyLjIzN2MuNTU2LjA0NC42Ny4zNjguMjQuNzM2bC0yLjI3NCAxLjk0NC42OTYgMi45MWMuMTMuNTQyLS4xNDMuNzUtLjYyNi40NTRsLTIuNTUxLTEuNTZ6IiBmaWxsPSJ1cmwoI2EpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=" alt="">
+                 <span v-text="k.items.restaurant.rating"></span>
+                 <span>{{`${  JSON.parse(k.items.restaurant.business_info)
+          .recent_order_num_display}`}}单</span>
                  <i class="fr"></i>
               </section>
               <section class="clearfix content_3_w">
                 <div class="fl">     
-                    <span>￥15起送</span>
-                     <span class="peisong">配送费￥1.5</span>
+                    <span>￥{{k.items.restaurant.piecewise_agent_fee.rules[0]['price']}}起送</span>
+                     <span class="peisong">{{k.items.restaurant.piecewise_agent_fee.description}}</span>
                 </div>
                 <div class="fr">
                   <span>17km</span>
@@ -52,13 +69,14 @@
                 </div>
               </section>
               <section class="content_4_w">
-              <span v-for="(ks,inds) in k.restaurant.support_tags" :key="inds" v-text="ks.text" :style="{'color':ks.color}"></span>
+              <span v-for="(ks,inds) in k.items.restaurant.support_tags" :key="inds" v-text="ks.text" :style="{'color':ks.color,'borderColor':'#'+ks.border}"></span>
+              <b class="zhuan" v-text="`${k.items.restaurant.delivery_mode?k.items.restaurant.delivery_mode.text:''}`"></b>
               </section>
               <section class="content_5_w clearfix">
                 <div class="c5_box fl">             
                    <div class="c5_le">   
                    <span class="jian_red">减</span>
-                    <span class="jian_p">满23减21，满45减31，满68减40，满99减60</span>
+                    <span class="jian_p" v-text="`${k.items.restaurant.activities[0]?k.items.restaurant.activities[0].description:''}`"></span>
                 </div>
                 <div class="c5_le">
                     <span class="jian_red">特</span>
@@ -79,9 +97,19 @@
 export default {
   data() {
     return {
-      arr: "",
-      cookie_name: "",
-      sort_item_w: ""
+      arr: "", //排序头部点击数据
+      cookie_name: "", //cookit有无
+      sort_item_w: "", //商品数据
+      page: 1, //商品数据页数
+      pageSize: 10, //商品数据个数
+      load_w: "", //获取整个网页的高度
+      stor_arr: ["综合排序", "距离最近", "品质联盟", "筛选"],
+      ranking_cur: -1, //点击综合排序样式
+      ranking_w1_isok: false,
+      ranking_w2_isok: false,
+      ranking_box_isok: false,
+      zong_w_inner: "综合排序",
+      sort_w_g: "" //根据数值排序
     };
   },
   async created() {
@@ -93,23 +121,48 @@ export default {
         }
       }
     );
-    // console.log(sorts);
-    this.arr = data.outside.outside_sort_filter;
+    // console.log(data.outside);
+    // console.log(data.outside[0].items.restaurant.business_info);
+    this.arr = data.outside.inside_sort_filter;
     this.cookie_name = this.getCookie(name);
-    console.log(this.cookie_name);
-    let item_data = await this.$axios.get(
-      "https://www.easy-mock.com/mock/5cfa2149b68e235523092660/example/item",
-      {
-        params: {
-          ID: 12345
-        }
+    // console.log(this.cookie_name);
+    this.init();
+  },
+  mounted() {
+    window.onscroll = () => {
+      //滚动条滑动加载
+      // console.log(document.body.scrollHeight - window.innerHeight);
+      // console.log(window.scrollY);
+      this.load_w = document.body.scrollHeight - window.innerHeight;
+      if (window.scrollY >= this.load_w) {
+        // console.log("ok");
+        this.page++;
+        this.init();
       }
-    );
-    console.log(item_data.data.items);
-    this.sort_item_w = item_data.data.items;
+    };
   },
   methods: {
+    async init() {
+      console.log("列表页运行");
+      let item_data = await this.$axios.get(
+        //商品列表
+        `https://www.easy-mock.com/mock/5cfa2149b68e235523092660/example/item?page=${
+          this.page
+        }&pageSize=${this.pageSize}`,
+        {
+          params: {
+            ID: 12345
+          }
+        }
+      );
+      // console.log(item_data.data.data);
+      // console.log(
+      //   item_data.data.data[0].items.restaurant.piecewise_agent_fee.rules[0]
+      // );
+      this.sort_item_w = [...this.sort_item_w, ...item_data.data.data];
+    },
     getCookie: function(c_name) {
+      //获取cookit
       if (document.cookie.length > 0) {
         var c_start = document.cookie.indexOf(c_name + "=");
         if (c_start != -1) {
@@ -122,12 +175,47 @@ export default {
       return "";
     },
     insertStr: function(soure, start, newStr) {
+      //字符串里插字符串
       return soure.slice(0, start) + newStr + soure.slice(start);
+    },
+    ranking_click(index, item) {
+      this.zong_w_inner = item;
+      this.ranking_cur = index;
+      this.ranking_box_isok = false;
+      this.ranking_w1_isok = false;
+      this.$store.state.mark_isok = !this.$store.state.mark_isok; //遮罩层
+      if (this.$store.state.mark_isok) this.stop();
+      if (this.$store.state.mark_isok == false) this.move();
+      //点击排序
+    },
+    ranking_show_zong() {
+      this.ranking_box_isok = !this.ranking_box_isok; //大盒子
+      this.ranking_w1_isok = !this.ranking_w1_isok; //综合盒子
+      this.$store.state.mark_isok = !this.$store.state.mark_isok; //遮罩层
+      // console.log(this.$store.state.mark_isok);
+      if (window.scrollY <= 700) window.scrollTo(0, 700);
+      if (this.$store.state.mark_isok) this.stop();
+      if (this.$store.state.mark_isok == false) this.move();
+    },
+    /***滑动限制***/
+    stop() {
+      var mo = function(e) {
+        e.preventDefault();
+      };
+      document.body.style.overflow = "hidden";
+      document.addEventListener("touchmove", mo, false); //禁止页面滑动
+    },
+    /***取消滑动限制***/
+    move() {
+      var mo = function(e) {
+        e.preventDefault();
+      };
+      document.body.style.overflow = ""; //出现滚动条
+      document.removeEventListener("touchmove", mo, false);
     }
   }
 };
 </script>
-
 <style lang="scss" scoped>
 @import "../assets/iconfont/iconfont.css";
 @import "../assets/iconfont/demo.css";
@@ -166,8 +254,14 @@ export default {
     right: 35%;
   }
   .sort-w-box {
+    line-height: 1.04rem;
     width: 100%;
-    ul {
+    background: #fff;
+    position: sticky;
+    left: 0;
+    top: 1.36rem;
+    z-index: 100;
+    .sort_item_w {
       width: 100%;
       display: flex;
       //  justify-content: center;
@@ -192,6 +286,29 @@ export default {
         i {
           font-size: 0.32rem;
           margin-left: 2px;
+        }
+      }
+    }
+    .ranking {
+      width: 100%;
+      background: #fff;
+      position: absolute;
+      ul {
+        li {
+          padding-left: 0.533333rem;
+          line-height: 1.066667rem;
+          font-size: 0.35rem;
+          position: relative;
+          img {
+            position: absolute;
+            right: 0.373333rem;
+            top: 50%;
+            width: 0.4rem;
+            height: 0.4rem;
+            display: none;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+          }
         }
       }
     }
@@ -282,12 +399,34 @@ export default {
         color: #ddd;
         content: "|";
       }
+      .content_4_w {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        span {
+          margin-right: 0.133333rem;
+          margin-bottom: 0.106667rem;
+          border-width: 0.5px;
+          border-style: solid;
+        }
+        .zhuan {
+          border-radius: 0.04rem;
+          line-height: 1.2;
+          font-size: 0.266667rem;
+          background: #0af;
+          color: #fff;
+          position: absolute;
+
+          right: 0px;
+        }
+      }
       .content_5_w {
         // display: flex;
         width: 7.466667rem;
 
         .c5_box {
-          width: 5.803333rem;
+          width: 5.603333rem;
           padding-right: 0.266667rem;
           overflow: hidden;
           white-space: nowrap;
@@ -296,6 +435,7 @@ export default {
           // flex: 1;
           .c5_le {
             width: 5.803333rem;
+            margin-bottom: 0.16rem;
             .jian_p {
               display: inline-block;
               width: 4.893333rem;

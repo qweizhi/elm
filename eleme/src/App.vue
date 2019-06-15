@@ -9,6 +9,8 @@
   </div>
 </template>
 <script>
+import "./assets/js/jQuery.js";
+// import "./assets/js/common.js";
 import wfooter from "@/components/Wfooter.vue";
 export default {
   components: {
