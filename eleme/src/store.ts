@@ -6,6 +6,19 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     // 决定头部是否出现
+    isShop : true,
+    onl: 0,
+    isshopTab : true,
+    // 决定loading是否出现
+    loading: 0,
+    // 1.建立空数组
+    orderList : [],
+    qty : 0,
+
+  },
+
+  actions: {
+
     isShop: true,
     isFooter: true,
     onl: 0,
@@ -25,6 +38,12 @@ export default new Vuex.Store({
     cookie_name: false //cookit有无
   },
   mutations: {
+    addItem(state, value) {
+      state.orderList.push(value);
+    },
+    addqty(state, value) {
+      state.qty;
+    },
     getCity(state, citynum) {
       state.get_city = citynum; // 突变赋值给city
     },

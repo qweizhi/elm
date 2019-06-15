@@ -12,7 +12,7 @@
   </div>
 </template>
 <script lang="ts">
-// import BScroll from 'better-scroll';
+import BScroll from 'better-scroll';
 import { Component, Vue } from 'vue-property-decorator';
 import ShopHeader from '@/components/ShopHeader.vue';
 import Ordering from '@/components/Ordering.vue';
@@ -43,6 +43,8 @@ import ShopFooter from '@/components/ShopFooter.vue';
         this.$store.state.isshopTab = false;
       }
     };
+
+
   },
   computed: {
     onl() {

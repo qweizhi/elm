@@ -102,6 +102,7 @@
                       aria-label="茄子肉丝饭，原价12元，现价12元。"
                       role="menuitem"
                       class
+                      
                     >
                       <div data-v-425277ec class="fooddetails-root_2HoY2">
                         <span class="fooddetails-logo_2Q0S7">
@@ -142,20 +143,26 @@
                             <span>
                               <!---->
                               <span class="cartbutton-entitybutton_9fUdS">
-                                <a href="javascript:" role="button" aria-label="减少商品">
+                                <a href="javascript:" role="button" aria-label="减少商品" 
+                                :style="{display:visible? 'none': 'block'}">
                                   <img
                                     style="whith:30px;height:30px;"
                                     src="../assets/jian-copy.svg"
                                     alt
                                   >
                                 </a>
-                                <input style="whith:40px;height:20px;" type="text">
+                                <!-- v-model="item.count" -->
+                                <!-- qty索引 -->
+                                <span >
+                                  <input :style="{display:visible? 'none': 'block'}"  style="whith:30px;height:20px;" v-model='j.foods[0].is_featured' type="text">
+                                </span>
+                                
                                 <!---->
                                 <!---->
-                                <a href="javascript:" role="button" aria-label="添加商品">
+                                <a  href="javascript:" role="button" aria-label="添加商品">
                                   <img
                                     style="whith:35px;height:35px;"
-                                    @click="Skip(j.id)"
+                                    @click="Skip(j.id,item)"
                                     src="../assets/jia.svg"
                                     alt
                                   >
@@ -228,9 +235,7 @@
             style="background-color: rgb(35, 149, 255);"
             @click="select(xinList.foods[0].image_path, xinList.foods[0].name,  xinList.foods[0].lowest_price,)"
           >
-          <router-link to="{name:shop, params:{orderList}}">
-          选好了
-          </router-link>
+            选好了
           </button>
         </div>
       </div>
@@ -243,14 +248,16 @@ import Vue from 'vue';
 export default Vue.extend({
   data() {
     return {
-      la: '',
+      la: '不辣',
       num: 0,
       qty: 0,
       ki: 0,
+      amount : 0,
       status: false,
+      visible : true,
       shopList: [],
       xinList: [],
-      orderList: [],
+      orderList : [],
       oh: false,
       // shoplist = ['https://www.easy-mock.com/mock/5cf66494c51c246c3655bfca/example/dianpushop'],
       // '
@@ -268,28 +275,31 @@ export default Vue.extend({
       this.shopList = data1.data.menu;
     },
     // 点击展开、拿数据
-    Skip(idx) {
+    Skip(id,idx) {
+      // 下标
+      this.amount =idx;
+      // console.log(this.amount)
       this.oh = true;
-      this.$refs.userinfo.style.display = 'block';
-      // this.num = idx;
-      // console.log(idx);
+      // 数组遍历判断
       this.shopList.forEach((item) => {
-        if (item.id === idx) {
+        if (item.id === id) {
           this.xinList = item;
-          console.log(this.xinList);
+          // console.log(this.xinList);
         } else {
           // console.log(id);
         }
       });
+      console.log(this.shopList[idx].name);
     },
     // 点击关闭
     specpanel() {
       this.oh = false;
-      this.$refs.userinfo.style.display = 'none';
     },
     // 点击选中
     lop(idx, p) {
+      // 当前索引
       this.qty = idx;
+
       this.la = p;
     },
     // 图片格式
@@ -304,10 +314,24 @@ export default Vue.extend({
     select(a, b, c) {
       // 制返
       this.oh = false;
-      this.$refs.userinfo.style.display = 'none';
-      this.orderList.push(a, b, c, this.la);
-      // console.log(this.orderList);
+      // 将内容制返
+      this.visible =false;
+      var arr = []; 
+      arr.push(a, b, c, this.la);
+      this.orderList.push(arr);
+       
+      // value的数据
+      this.xinList.foods[0].is_featured++;
+      // console.log(this.xinList);
+
+
+      // vuex传递数据
+      this.$store.commit('addItem', {
+        orderList : this.orderList,
+      });
     },
+
+
   },
 });
 </script>

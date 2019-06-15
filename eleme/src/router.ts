@@ -1,9 +1,15 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import Order from './views/Order.vue';
+import LineItem from './views/LineItem.vue';
+import Shop from './views/Shop.vue';
+
+
+
+
 import My from './views/My.vue';
 import Find from './views/Find.vue';
-import Nologin from './views/Nologin.vue';
 
 Vue.use(Router);
 
@@ -15,15 +21,6 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: Home,
-
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
-    },
-    {
-      path: '/',
-      redirect: 'home',
 
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
@@ -51,23 +48,15 @@ export default new Router({
       // component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
-      path: '/nologin',
-      name: 'nologin',
-      component: Nologin,
-
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
-    },
-    {
       path: '/order',
       name: 'order',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ './components/Order.vue'),
+      // component: () => import(/* webpackChunkName: "about" */ './components/Order.vue'),
+      // 路由懒加载
+      component: resolve =>require(['@/components/Order'], resolve),
+
     },
     {
       path: '/lineItem',
@@ -75,8 +64,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ './views/Lineitem.vue'),
+      component: () => import(/* webpackChunkName: "about" */ './views/Lineitem.vue'),
     },
     {
       path: '/shop',
@@ -84,8 +72,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ './views/Shop.vue'),
+      component: () => import(/* webpackChunkName: "about" */ './views/Shop.vue'),
     },
     {
       path: '/merchant',
@@ -93,17 +80,26 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ './components/Merchant.vue'),
+      component: () => import(/* webpackChunkName: "about" */ './components/Merchant.vue'),
     },
     {
-      path: '/login',
-      name: 'login',
+      path: '/shopfooter',
+      name: 'shopfooter',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ './components/Login.vue'),
+      component: () => import(/* webpackChunkName: "about" */ './components/ShopFooter.vue'),
     },
+    {
+      path: '/affirm',
+      name: 'affirm',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/Affirm.vue'),
+    },
+
+
+
   ],
 });
