@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isshopfooter">
     <footer :style="{display:isfooter? 'block':'none'}" class="cartview-cartview_m8q55">
       {{pagelists? '' : '' }}
       <div class="cartview-cartmask_39Pun" style="z-index: 10; display: none;"></div>
@@ -215,6 +215,9 @@ export default Vue.extend({
         this.number += 1;
 
       }
+    },
+    isshopfooter(){
+      return this.$store.state.isshopfooder;
     }
   },
   // mounted(){

@@ -265,6 +265,7 @@ export default Vue.extend({
   },
   created() {
     this.getshopList(() => {});
+    this.$store.state.isFooter = 1;
   },
   methods: {
     async getshopList() {

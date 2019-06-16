@@ -14,6 +14,9 @@ export default {
     // "orderList":resolve=>(['./order'],resolve)
     orderList
   },
+  created() {
+    this.$store.state.isFooter = 1;
+  }
 
 };
 </script>

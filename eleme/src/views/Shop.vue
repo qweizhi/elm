@@ -2,11 +2,11 @@
   <div>
     <ShopHeader/>
     <!-- 点餐 -->
-    <Ordering v-show="onl===0"></Ordering>
+    <Ordering v-show="onl===0" ></Ordering>
     <!-- 评价 -->
-    <Appraise v-show="onl===1"></Appraise>
+    <Appraise v-show="onl===1" ></Appraise>
     <!-- 商家 -->
-    <Merchant v-show="onl===2"></Merchant>
+    <Merchant v-show="onl===2" ></Merchant>
     <ShopFooter/>
     
   </div>
@@ -32,7 +32,9 @@ import ShopFooter from '@/components/ShopFooter.vue';
   },
   created() {
     // 通头部出现
-    // this.$store.state.isShop = 1;
+    this.$store.state.isFooter = 0;
+    this.$store.state.isshopfooter = 1;
+    
   },
   mounted() {
     window.onscroll = (e) => {

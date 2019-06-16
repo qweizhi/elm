@@ -7,22 +7,16 @@ export default new Vuex.Store({
   state: {
     // 决定头部是否出现
     isShop : true,
-    onl: 0,
+    onl: 0,//跳转点餐、评价、商家
+    isshopfooder : true,
     isshopTab : true,
     // 决定loading是否出现
     loading: 0,
     // 1.建立空数组
     orderList : [],
+    // 数量
     qty : 0,
-
-  },
-
-  actions: {
-
-    isShop: true,
     isFooter: true,
-    onl: 0,
-    isshopTab: true,
     mark_isok: false, // 遮罩
     city: "选择城市", // 接受城市值
     load_left: "100%",
@@ -31,6 +25,11 @@ export default new Vuex.Store({
     item_city_isok: false,
     get_city: "",
     cur_num: 0 //底部选项卡高亮
+
+
+  },
+
+  actions: {
   },
   mutations: {
     addItem(state, value) {
@@ -67,5 +66,7 @@ export default new Vuex.Store({
       state.city = val;
     }
   },
-  actions: {}
+
+    
+  // actions: {}
 });

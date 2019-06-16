@@ -284,8 +284,14 @@ export default Vue.extend({
         }
     
     },
-    mounted(){
-console.log(this.$route.params.tabaLiat);
+    created() {
+    // 通头部出现
+    this.$store.state.isshopfooter=0;
+    this.$store.state.isFooter = 1;
+    
+  },
+    mounted(){  
+      console.log(this.$route.params.tabaLiat);
     },
     computed:{
         // 取数据

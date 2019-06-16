@@ -7,7 +7,9 @@
           class="index-2g0nR index-2TCKU"
           style="background-image: url(&quot;//fuss10.elemecdn.com/3/fc/85d6134e4f58cd2a8fa54e813aa88jpeg.jpeg?imageMogr/format/webp/thumbnail/750x/thumbnail/!40p/blur/50x40/&quot;);"
         >
+          <router-link to="order">
           <a href="javascript:;" class="index--iRT3"></a>
+          </router-link>
           <!---->
         </nav>
         <div class="index-ccm5A">
