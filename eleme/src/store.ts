@@ -6,23 +6,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     // 决定头部是否出现
-    isShop : true,
+    isShop: true,
     onl: 0,
-    isshopTab : true,
+    isshopTab: true,
     // 决定loading是否出现
     loading: 0,
     // 1.建立空数组
-    orderList : [],
-    qty : 0,
-
-  },
-
-  actions: {
-
-    isShop: true,
+    orderList: [],
+    qty: 0,
     isFooter: true,
-    onl: 0,
-    isshopTab: true,
     mark_isok: false, // 遮罩
     city: "选择城市", // 接受城市值
     load_left: "100%",
@@ -37,6 +29,7 @@ export default new Vuex.Store({
     load_zheng: false,
     cookie_name: false //cookit有无
   },
+
   mutations: {
     addItem(state, value) {
       state.orderList.push(value);

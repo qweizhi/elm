@@ -42,7 +42,7 @@
             <input type="button" value="登录">
         </div>
 
-        <div class="list_e_w" v-if="!cookie_name">
+        <div @click="list_router" class="list_e_w" v-if="!cookie_name">
           <div class="item_w clearfix" v-for="(k,ind) in sort_item_w" :key="ind">
             <img class="item_img1_w fl" :src="`https://fuss10.elemecdn.com/${insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/').slice(-3) =='png'?insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/')+'.png':insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/') + '.jpeg'}`" alt="">
             <div class="item_w_lt fr">
@@ -147,7 +147,15 @@ export default {
     this.init();
   },
   mounted() {
-    window.onscroll = () => {
+    window.addEventListener("scroll", this.homescroll, true);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.homescroll, false);
+    this.$store.state.mark_isok = false;
+    this.move();
+  },
+  methods: {
+    homescroll() {
       //滚动条滑动加载
       // console.log(document.body.scrollHeight - window.innerHeight);
       // console.log(window.scrollY);
@@ -159,9 +167,7 @@ export default {
           this.init();
         }
       }
-    };
-  },
-  methods: {
+    },
     async init() {
       if (this.sort_item_w) {
         this.$store.state.load_zheng = true;
@@ -245,6 +251,9 @@ export default {
       };
       document.body.style.overflow = ""; //出现滚动条
       document.removeEventListener("touchmove", mo, false);
+    },
+    list_router() {
+      this.$router.push({ path: "shop" });
     }
   }
 };

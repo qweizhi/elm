@@ -61,7 +61,6 @@ export default {
         }
       }
     );
-    console.log(data);
     this.arr = data.city;
   },
   methods: {
@@ -81,7 +80,8 @@ export default {
               if (
                 t.pinyin
                   .toLocaleLowerCase()
-                  .indexOf(this.py.toLocaleLowerCase()) !== -1 //判断表单匹配数据局拼音有无
+                  .indexOf(this.py.toLocaleLowerCase()) !== -1 ||
+                t.name.indexOf(this.py) !== -1 //判断表单匹配数据局拼音有无
               ) {
                 this.city_num.push(t.name);
               }
