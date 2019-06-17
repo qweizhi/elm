@@ -330,8 +330,6 @@ export default Vue.extend({
         orderList : this.orderList,
       });
     },
-
-
   },
 });
 </script>

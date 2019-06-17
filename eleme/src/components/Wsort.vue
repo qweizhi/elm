@@ -147,10 +147,10 @@ export default {
     this.init();
   },
   mounted() {
-    window.addEventListener("scroll", this.homescroll, true);
+    window.addEventListener("scroll", this.homescroll);
   },
   destroyed() {
-    window.removeEventListener("scroll", this.homescroll, false);
+    window.removeEventListener("scroll", this.homescroll);
     this.$store.state.mark_isok = false;
     this.move();
   },
@@ -165,6 +165,8 @@ export default {
           // console.log("ok");
           this.page++;
           this.init();
+        }else{
+          console.log('我滚了');
         }
       }
     },

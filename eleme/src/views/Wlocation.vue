@@ -1,7 +1,7 @@
 <template>
-    <div class="location" :style="{'right':'-'+load_left,'left':load_left}">
+    <div class="location" :style="{'right':'-'+load_left,'left':load_left}" ref="dahezi">
         <wautonavi/>
-        <wcity/>
+        <wcity  @give-box="give_box"/>
     </div>
 </template>
 <script>
@@ -19,7 +19,25 @@ export default {
     load_left: function() {
       return this.$store.state.load_left;
     }
+  },
+  methods: {
+    give_box(value) {
+      // console.log(value);
+      this.$refs.dahezi.scrollTop = value - 44;
+    }
   }
+  // mounted() {
+  //   this.$on("give", data => {
+  //     console.log(data);
+  //   });
+  // }
+  // methods: {
+  //   click() {
+  //     console.log(this.$refs);
+  //     // this.$refs.dahezi.scrollTop = 1000;
+
+  //   }
+  // }
 };
 </script>
 <style lang="scss" scoped>

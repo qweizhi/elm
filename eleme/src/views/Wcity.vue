@@ -1,7 +1,7 @@
 <template>
     <div>
         <winautonavi/>
-        <wcitySelection/>
+        <wcitySelection @give="give"/>
     </div>
 </template>
 <script>
@@ -16,6 +16,12 @@ export default {
   computed: {
     load_left: function() {
       return this.$store.state.load_left;
+    }
+  },
+  methods: {
+    give(value) {
+      // console.log(value);
+      this.$emit("give-box", value);
     }
   }
 };

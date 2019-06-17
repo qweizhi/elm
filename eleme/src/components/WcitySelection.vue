@@ -9,7 +9,7 @@
         当前定位城市
       </h3>
       <p v-show="item_city_isok"  class="cur_f" style="margin-left:0px;text-indent:1em;">{{city}}</p>
-      <dl class="" v-for="(item,index) in arr" :key="index">
+      <dl class="" v-for="(item,index) in arr" :key="index" ref="louceng">
       <dt v-text="item.initial"  class="cur_c"></dt>
       <dd v-for="(t,ind) in item.list" :key="ind"  class="cur_f" @click="city_item_f(t.name)">{{t.name}}</dd>
       </dl>
@@ -21,7 +21,7 @@
       <div class="city_end" v-show="city_end_isok">无结果</div>
     </div>
     <div class="city-2_cDS_0" v-show="inauto_isok">
-      <span v-for="(ts,is) in arr" :key="is" v-text="ts.initial"></span>
+      <span v-for="(ts,is) in arr" :key="is" v-text="ts.initial" @click="tiao_lou(is,$event)"></span>
     </div>
     </div>
 </template>
@@ -31,7 +31,9 @@ export default {
     return {
       arr: "",
       py: "",
-      city_num: []
+      city_num: [],
+      listHeight: 0, //当前显示的楼层
+      click_tiao: [] //每个盒子距离顶部的高度
     };
   },
   computed: {
@@ -62,6 +64,7 @@ export default {
       }
     );
     this.arr = data.city;
+    // window.scrollTo(0, 600);
   },
   methods: {
     city_item_f(item) {
@@ -97,6 +100,19 @@ export default {
           this.$store.state.filter_city = true;
         }
       }, 100);
+    },
+    tiao_lou(index, el) {
+      // console.log(index);
+      // console.log(el);
+      // console.log(this.$refs);
+      // console.log(this.$refs.louceng[index].offsetTop);
+      // // document.body.scrollTop = this.$refs.louceng[index].offsetTop;
+      // console.log(this.$refs.louceng[index].offsetTop);
+      // console.log(this.$refs.dahezi);
+      // window.scrollTo(0, this.$refs.louceng[index].offsetTop);
+      // console.log(1);
+      // this.$refs.dahezi.scrollTop = 1000;
+      this.$emit("give", this.$refs.louceng[index].offsetTop);
     }
   },
   directives: {
