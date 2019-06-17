@@ -103,7 +103,9 @@ export default Vue.extend({
   data() {
     return {
       lis: [],
-      hight: ""
+      hight: "",
+      page : 1,
+      pageSize: 6,
     };
   },
   // 生命周期第二阶段拿数据ajax
@@ -115,8 +117,8 @@ export default Vue.extend({
     // 获取列表数据
     async getLis() {
       // this.$store.state.loading += 1;
-      const data = await this.$axios(
-        "https://www.easy-mock.com/mock/5cf66494c51c246c3655bfca/example/orderList"
+      const  data  = await this.$axios.get(
+      `https://www.easy-mock.com/mock/5cf66494c51c246c3655bfca/example/orderList?page=${this.page}&pageSize=${this.pageSize}`
       );
       // this.$store.state.loading -= 1;
       this.lis = [...this.lis, ...data.data];
@@ -132,9 +134,12 @@ export default Vue.extend({
     // 懒加载
     window.addEventListener("scroll", () => {
       this.hight = document.body.offsetHeight - window.innerHeight;
-      console.log(this.hight, window.scrollY);
       if (window.scrollY >= this.hight) {
-        console.log("到底部了");
+        this.page++;
+        if(this.page>=5){
+          console.log(5);
+          return;
+        }
         this.getLis();
       }
     });

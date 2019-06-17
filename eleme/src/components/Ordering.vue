@@ -265,7 +265,6 @@ export default Vue.extend({
   },
   created() {
     this.getshopList(() => {});
-    this.$store.state.isFooter = 1;
   },
   methods: {
     async getshopList() {
@@ -278,7 +277,7 @@ export default Vue.extend({
     // 点击展开、拿数据
     Skip(id,idx) {
       // 下标
-      this.amount =idx;
+      // this.amount =idx;
       // console.log(this.amount)
       this.oh = true;
       // 数组遍历判断
@@ -290,7 +289,7 @@ export default Vue.extend({
           // console.log(id);
         }
       });
-      console.log(this.shopList[idx].name);
+      // console.log(this.shopList[idx].name);
     },
     // 点击关闭
     specpanel() {
@@ -298,7 +297,7 @@ export default Vue.extend({
     },
     // 点击选中
     lop(idx, p) {
-      // 当前索引
+      // 当前索引用于辣度
       this.qty = idx;
 
       this.la = p;
@@ -316,6 +315,7 @@ export default Vue.extend({
       // 制返
       this.oh = false;
       // 将内容制返
+      
       this.visible =false;
       var arr = []; 
       arr.push(a, b, c, this.la);

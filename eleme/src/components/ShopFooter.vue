@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isshopfooter">
+  <div v-if="isshopfooder">
     <footer :style="{display:isfooter? 'block':'none'}" class="cartview-cartview_m8q55">
       {{pagelists? '' : '' }}
       <div class="cartview-cartmask_39Pun" style="z-index: 10; display: none;"></div>
@@ -211,12 +211,18 @@ export default Vue.extend({
         });
         // 显示的总价
         this.tatal2 += this.tatal;
-
         this.number += 1;
-
+         // 判断是否显示
+        if(this.$store.state.onl=0){
+          this.$store.state.isshopfooder = 1;
+          this.$store.state.isFooter=0;
+        }else{
+          this.$store.state.isshopfooder = 0;
+          this.$store.state.isFooter=1;
+        }
       }
     },
-    isshopfooter(){
+    isshopfooder(){
       return this.$store.state.isshopfooder;
     }
   },

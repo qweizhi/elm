@@ -15,7 +15,7 @@ export default {
     orderList
   },
   created() {
-    this.$store.state.isFooter = 1;
+
   }
 
 };

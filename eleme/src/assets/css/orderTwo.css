@@ -1,8 +1,8 @@
-*{
+/* *{
   margin: 0;
   padding: 0;
   text-decoration:none;
-}
+} */
 
 @font-face {
     font-family: CSD;
@@ -389,6 +389,7 @@
   .vw ._nc .stage3 .title {
     font-size: 5.333vw;
     margin: 10.667vw 0 5.333vw;
+    color: #000;
   }
   .vw ._nc .stage3 .menu .label {
     font-size: 4.267vw;
@@ -566,6 +567,7 @@
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    color: #000;
   }
   .ordercard .ordercard-head .name[data-v-54bf175d],
   .ordercard .ordercard-head .title[data-v-54bf175d] {
@@ -577,11 +579,12 @@
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    color: #000;
   }
   .ordercard .ordercard-head .name[data-v-54bf175d] {
     font-size: 0.426667rem;
     line-height: 1.5em;
-    color: #333;
+    color: #000;
   }
   .ordercard .ordercard-head .name .content[data-v-54bf175d] {
     display: inline-block;

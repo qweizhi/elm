@@ -968,9 +968,6 @@ export default {
   created() {
     // 通知头部出现
     this.$store.state.isShop = 1;
-    // 通底部出现
-    this.$store.state.isFooter = 0;
-    this.$store.state.isshopfooter = 1;
   },
 };
 </script>
