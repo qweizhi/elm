@@ -1,102 +1,134 @@
 <template>
-    <div class="w-sort">
-        <h2>
-            推荐商家
-        </h2>
-        <div class="sort-w-box">
-            <ul class="sort_item_w">
-                <li>
-                    <a to="/home/ranking" @click="ranking_show_zong">
-                  {{zong_w_inner}}
-                    </a>
-                    <span></span>
-                </li>
-                <li>
-                    距离最近
-                </li>
-                <li>品质联盟</li>
-                <li>
-                    <a to="/screen">筛选</a>
-                      <i class="iconfont icon-shaixuan"></i>
-                </li>
-            </ul>
-            <div class="ranking">
-               <div class="ranking_box_w1" v-show="ranking_w1_isok">
-                  <ul>
-                    <li v-for="(s,i) in arr" :key="i" :style="`color:${i==ranking_cur?'#3190e8':''}`" @click="ranking_click(i,s.name)">
-                      {{s.name}}
-                  <img :style="`display:${i==ranking_cur?'block':'none'}`" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAkFJREFUSA3tlbtrVFEQxr/JusEkdqYR0mU3EGyECCKCIEIghIgSfBSCCkbwWqTQykoQ41+QbHaRRC0MSDCgjeADO0ERQRBB10YsU/gC89jd8ZuNez17H7gmN2BxT7Fnzpw587vzzbl3gXSkCqQKJKSAJJQnlKb3huawjDkCZj94KIiIukGbAs5P636t4h5J2w1GyHz5ghx1wW3uIgm7b0pPaQ2PHOg3tGEimDsxsKpKbkonqoqbqmivgwRLksFI+by8DoITkXqgqJ1fq7hN4GgDwMQVajxa9uR+w+fOW9zFeuz+ou74UoEl3+2fFyilPPs+BmpxkVLnpnVvflLHTT4/WYSRL+mu1QpecOsPlAseukTorYgjviuU2F4DWcFzytbNqCfSjtPlMfnsn/htsJ+HoLjDS9Tl7ongOuW97Pqi7FDFslzvlUFtHNRVvOkr6Im15dpvb0Ev8sEWglCWWmoFallCFeeLuqdWxVNW0+nCaM9JB8bxE9cIHAvsWaL5kx6OXxGpBfei1iGwBeUmdYTdXSA84x6ijCv+q9K0gcdbuzH89hib1OIISW3n+JV5wMkL5oiBviT0yL9ALW8k2DY+elLidNXsuEEF3mW7METoj7iYOH+k1G4wb+8MKz3j+uq24JNksS/qxodiIxyxFTdie/pxjk/3sLG2mZUu8sszuF5oPYebMM7eeVe3LS3iGS/bAKHfeasPsBWv4uJb8f+1YktiPezIYth6mhEc3ii0lQdriuGfQbbJkS5SBf5HBX4Bvl6o9YDxgOsAAAAASUVORK5CYII=" class="selected_w">
-                    </li>
-                  </ul>
-              </div>
-              <div class="ranking_box_w2" v-show="ranking_w2_isok">
-
-              </div>
-            </div>
+  <div class="w-sort">
+    <h2>推荐商家</h2>
+    <div class="sort-w-box">
+      <ul class="sort_item_w">
+        <li>
+          <a to="/home/ranking" @click="ranking_show_zong">{{zong_w_inner}}</a>
+          <span></span>
+        </li>
+        <li>距离最近</li>
+        <li>品质联盟</li>
+        <li>
+          <a to="/screen">筛选</a>
+          <i class="iconfont icon-shaixuan"></i>
+        </li>
+      </ul>
+      <div class="ranking">
+        <div class="ranking_box_w1" v-show="ranking_w1_isok">
+          <ul>
+            <li
+              v-for="(s,i) in arr"
+              :key="i"
+              :style="`color:${i==ranking_cur?'#3190e8':''}`"
+              @click="ranking_click(i,s.name)"
+            >
+              {{s.name}}
+              <img
+                :style="`display:${i==ranking_cur?'block':'none'}`"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAkFJREFUSA3tlbtrVFEQxr/JusEkdqYR0mU3EGyECCKCIEIghIgSfBSCCkbwWqTQykoQ41+QbHaRRC0MSDCgjeADO0ERQRBB10YsU/gC89jd8ZuNez17H7gmN2BxT7Fnzpw587vzzbl3gXSkCqQKJKSAJJQnlKb3huawjDkCZj94KIiIukGbAs5P636t4h5J2w1GyHz5ghx1wW3uIgm7b0pPaQ2PHOg3tGEimDsxsKpKbkonqoqbqmivgwRLksFI+by8DoITkXqgqJ1fq7hN4GgDwMQVajxa9uR+w+fOW9zFeuz+ou74UoEl3+2fFyilPPs+BmpxkVLnpnVvflLHTT4/WYSRL+mu1QpecOsPlAseukTorYgjviuU2F4DWcFzytbNqCfSjtPlMfnsn/htsJ+HoLjDS9Tl7ongOuW97Pqi7FDFslzvlUFtHNRVvOkr6Im15dpvb0Ev8sEWglCWWmoFallCFeeLuqdWxVNW0+nCaM9JB8bxE9cIHAvsWaL5kx6OXxGpBfei1iGwBeUmdYTdXSA84x6ijCv+q9K0gcdbuzH89hib1OIISW3n+JV5wMkL5oiBviT0yL9ALW8k2DY+elLidNXsuEEF3mW7METoj7iYOH+k1G4wb+8MKz3j+uq24JNksS/qxodiIxyxFTdie/pxjk/3sLG2mZUu8sszuF5oPYebMM7eeVe3LS3iGS/bAKHfeasPsBWv4uJb8f+1YktiPezIYth6mhEc3ii0lQdriuGfQbbJkS5SBf5HBX4Bvl6o9YDxgOsAAAAASUVORK5CYII="
+                class="selected_w"
+              >
+            </li>
+          </ul>
         </div>
-      
-        <div class="login-w-m" v-if="cookie_name">
-            <img src="https://fuss10.elemecdn.com/d/60/70008646170d1f654e926a2aaa3afpng.png" alt="">
-            <h3>没有结果</h3>
-            <p>登录后查看更多商家</p>
-            <input type="button" value="登录">
-        </div>
-
-        <div @click="list_router" class="list_e_w" v-if="!cookie_name">
-          <div class="item_w clearfix" v-for="(k,ind) in sort_item_w" :key="ind">
-            <img class="item_img1_w fl" :src="`https://fuss10.elemecdn.com/${insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/').slice(-3) =='png'?insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/')+'.png':insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/') + '.jpeg'}`" alt="">
-            <div class="item_w_lt fr">
-              <section class="content_1_w clearfix">
-                <h3 class="fl" v-text="k.items.restaurant.name">
-              </h3>
-               <span class="fr">···</span>
-              </section>
-              <section class="content_2_w">
-                 <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IHgxPSIwJSIgeTE9IjUwJSIgeTI9IjUwJSIgaWQ9ImEiPjxzdG9wIHN0b3AtY29sb3I9IiNGRkRFMDAiIG9mZnNldD0iMCUiLz48c3RvcCBzdG9wLWNvbG9yPSIjRkZCMDAwIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBkPSJNNTQuMDE3IDguMDcybC0yLjU1MiAxLjU2MWMtLjQ3Ni4yOTEtLjc1OC4wOTYtLjYyNi0uNDU1bC42OTYtMi45MDktMi4yNzMtMS45NDRjLS40MjQtLjM2Mi0uMzI1LS42OTEuMjM5LS43MzZsMi45ODItLjIzN0w1My42My41ODljLjIxMy0uNTE1LjU1Ny0uNTIzLjc3NCAwbDEuMTQ2IDIuNzYzIDIuOTgyLjIzN2MuNTU2LjA0NC42Ny4zNjguMjQuNzM2bC0yLjI3NCAxLjk0NC42OTYgMi45MWMuMTMuNTQyLS4xNDMuNzUtLjYyNi40NTRsLTIuNTUxLTEuNTZ6bS00OCAwTDMuNDY1IDkuNjMzYy0uNDc2LjI5MS0uNzU4LjA5Ni0uNjI2LS40NTVsLjY5Ni0yLjkwOS0yLjI3My0xLjk0NGMtLjQyNC0uMzYyLS4zMjUtLjY5MS4yMzktLjczNmwyLjk4Mi0uMjM3TDUuNjMuNTg5Yy4yMTMtLjUxNS41NTctLjUyMy43NzQgMEw3LjU1IDMuMzUybDIuOTgyLjIzN2MuNTU2LjA0NC42Ny4zNjguMjQuNzM2TDguNDk3IDYuMjY5bC42OTYgMi45MWMuMTMuNTQyLS4xNDMuNzUtLjYyNi40NTRsLTIuNTUxLTEuNTZ6bTEyIDBsLTIuNTUyIDEuNTYxYy0uNDc2LjI5MS0uNzU4LjA5Ni0uNjI2LS40NTVsLjY5Ni0yLjkwOS0yLjI3My0xLjk0NGMtLjQyNC0uMzYyLS4zMjUtLjY5MS4yMzktLjczNmwyLjk4Mi0uMjM3TDE3LjYzLjU4OWMuMjEzLS41MTUuNTU3LS41MjMuNzc0IDBsMS4xNDYgMi43NjMgMi45ODIuMjM3Yy41NTYuMDQ0LjY3LjM2OC4yNC43MzZsLTIuMjc0IDEuOTQ0LjY5NiAyLjkxYy4xMy41NDItLjE0My43NS0uNjI2LjQ1NGwtMi41NTEtMS41NnptMTIgMGwtMi41NTIgMS41NjFjLS40NzYuMjkxLS43NTguMDk2LS42MjYtLjQ1NWwuNjk2LTIuOTA5LTIuMjczLTEuOTQ0Yy0uNDI0LS4zNjItLjMyNS0uNjkxLjIzOS0uNzM2bDIuOTgyLS4yMzdMMjkuNjMuNTg5Yy4yMTMtLjUxNS41NTctLjUyMy43NzQgMGwxLjE0NiAyLjc2MyAyLjk4Mi4yMzdjLjU1Ni4wNDQuNjcuMzY4LjI0LjczNmwtMi4yNzQgMS45NDQuNjk2IDIuOTFjLjEzLjU0Mi0uMTQzLjc1LS42MjYuNDU0bC0yLjU1MS0xLjU2em0xMiAwbC0yLjU1MiAxLjU2MWMtLjQ3Ni4yOTEtLjc1OC4wOTYtLjYyNi0uNDU1bC42OTYtMi45MDktMi4yNzMtMS45NDRjLS40MjQtLjM2Mi0uMzI1LS42OTEuMjM5LS43MzZsMi45ODItLjIzN0w0MS42My41ODljLjIxMy0uNTE1LjU1Ny0uNTIzLjc3NCAwbDEuMTQ2IDIuNzYzIDIuOTgyLjIzN2MuNTU2LjA0NC42Ny4zNjguMjQuNzM2bC0yLjI3NCAxLjk0NC42OTYgMi45MWMuMTMuNTQyLS4xNDMuNzUtLjYyNi40NTRsLTIuNTUxLTEuNTZ6IiBmaWxsPSJ1cmwoI2EpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=" alt="">
-                 <span v-text="k.items.restaurant.rating"></span>
-                 <span>{{`${  JSON.parse(k.items.restaurant.business_info)
-          .recent_order_num_display}`}}单</span>
-                 <i class="fr"></i>
-              </section>
-              <section class="clearfix content_3_w">
-                <div class="fl">     
-                    <span>￥{{k.items.restaurant.piecewise_agent_fee.rules[0]['price']}}起送</span>
-                     <span class="peisong">{{k.items.restaurant.piecewise_agent_fee.description}}</span>
-                </div>
-                <div class="fr">
-                  <span>17km</span>
-                  <span>34分钟</span>
-                </div>
-              </section>
-              <section class="content_4_w">
-              <span v-for="(ks,inds) in k.items.restaurant.support_tags" :key="inds" v-text="ks.text" :style="{'color':ks.color,'borderColor':'#'+ks.border}"></span>
-              <b class="zhuan" v-text="`${k.items.restaurant.delivery_mode?k.items.restaurant.delivery_mode.text:''}`"></b>
-              </section>
-              <section class="content_5_w clearfix">
-                <div class="c5_box fl">             
-                   <div class="c5_le">   
-                   <span class="jian_red">减</span>
-                    <span class="jian_p" v-text="`${k.items.restaurant.activities[0]?k.items.restaurant.activities[0].description:''}`"></span>
-                </div>
-                <div class="c5_le">
-                    <span class="jian_red">特</span>
-                    <span>特价商品8.8元</span>
-                 </div>
-                 </div>
-                 <div class="fr huodong">
-                   <span>4个活动</span>
-                   <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjOTk5IiBkPSJNNC41NzcgNS40MjNjLjc5Ljc3IDIuMDczLjc2NyAyLjg1NyAwbDQuMTItNC4wMjZDMTIuMzQ1LjYyNSAxMi4wOSAwIDEwLjk4NSAwSDEuMDI3Qy0uMDc3IDAtLjMzLjYzLjQ1NyAxLjM5N2w0LjEyIDQuMDI2eiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+" alt="">
-                 </div>
-              </section>
-            </div>
-          </div>
-        </div>
-        <img v-show="loading_isok" class="loading" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560592832689&di=63953333a337ceb70dbb17d8f7ce3758&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F98aefafe79d36f431f17dba205b3d4faa3684a2f96c1-qG1kd0_fw658" alt="">
-        <div class="" v-show="load_zheng" style="width:100%;text-align:center;">
-          <img style="width:1rem;height:1rem" src="http://img.lanrentuku.com/img/allimg/1212/5-121204193R0-50.gif" alt="">
-        正在加载
-        </div>
+        <div class="ranking_box_w2" v-show="ranking_w2_isok"></div>
+      </div>
     </div>
+
+    <div class="login-w-m" v-if="cookie_name">
+      <img src="https://fuss10.elemecdn.com/d/60/70008646170d1f654e926a2aaa3afpng.png" alt>
+      <h3>没有结果</h3>
+      <p>登录后查看更多商家</p>
+      <router-link class="login" to="/login">登录</router-link>
+    </div>
+
+    <div @click="list_router" class="list_e_w" v-if="!cookie_name">
+      <div class="item_w clearfix" v-for="(k,ind) in sort_item_w" :key="ind">
+        <img
+          class="item_img1_w fl"
+          :src="`https://fuss10.elemecdn.com/${insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/').slice(-3) =='png'?insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/')+'.png':insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/') + '.jpeg'}`"
+          alt
+        >
+        <div class="item_w_lt fr">
+          <section class="content_1_w clearfix">
+            <h3 class="fl" v-text="k.items.restaurant.name"></h3>
+            <span class="fr">···</span>
+          </section>
+          <section class="content_2_w">
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IHgxPSIwJSIgeTE9IjUwJSIgeTI9IjUwJSIgaWQ9ImEiPjxzdG9wIHN0b3AtY29sb3I9IiNGRkRFMDAiIG9mZnNldD0iMCUiLz48c3RvcCBzdG9wLWNvbG9yPSIjRkZCMDAwIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBkPSJNNTQuMDE3IDguMDcybC0yLjU1MiAxLjU2MWMtLjQ3Ni4yOTEtLjc1OC4wOTYtLjYyNi0uNDU1bC42OTYtMi45MDktMi4yNzMtMS45NDRjLS40MjQtLjM2Mi0uMzI1LS42OTEuMjM5LS43MzZsMi45ODItLjIzN0w1My42My41ODljLjIxMy0uNTE1LjU1Ny0uNTIzLjc3NCAwbDEuMTQ2IDIuNzYzIDIuOTgyLjIzN2MuNTU2LjA0NC42Ny4zNjguMjQuNzM2bC0yLjI3NCAxLjk0NC42OTYgMi45MWMuMTMuNTQyLS4xNDMuNzUtLjYyNi40NTRsLTIuNTUxLTEuNTZ6bS00OCAwTDMuNDY1IDkuNjMzYy0uNDc2LjI5MS0uNzU4LjA5Ni0uNjI2LS40NTVsLjY5Ni0yLjkwOS0yLjI3My0xLjk0NGMtLjQyNC0uMzYyLS4zMjUtLjY5MS4yMzktLjczNmwyLjk4Mi0uMjM3TDUuNjMuNTg5Yy4yMTMtLjUxNS41NTctLjUyMy43NzQgMEw3LjU1IDMuMzUybDIuOTgyLjIzN2MuNTU2LjA0NC42Ny4zNjguMjQuNzM2TDguNDk3IDYuMjY5bC42OTYgMi45MWMuMTMuNTQyLS4xNDMuNzUtLjYyNi40NTRsLTIuNTUxLTEuNTZ6bTEyIDBsLTIuNTUyIDEuNTYxYy0uNDc2LjI5MS0uNzU4LjA5Ni0uNjI2LS40NTVsLjY5Ni0yLjkwOS0yLjI3My0xLjk0NGMtLjQyNC0uMzYyLS4zMjUtLjY5MS4yMzktLjczNmwyLjk4Mi0uMjM3TDE3LjYzLjU4OWMuMjEzLS41MTUuNTU3LS41MjMuNzc0IDBsMS4xNDYgMi43NjMgMi45ODIuMjM3Yy41NTYuMDQ0LjY3LjM2OC4yNC43MzZsLTIuMjc0IDEuOTQ0LjY5NiAyLjkxYy4xMy41NDItLjE0My43NS0uNjI2LjQ1NGwtMi41NTEtMS41NnptMTIgMGwtMi41NTIgMS41NjFjLS40NzYuMjkxLS43NTguMDk2LS42MjYtLjQ1NWwuNjk2LTIuOTA5LTIuMjczLTEuOTQ0Yy0uNDI0LS4zNjItLjMyNS0uNjkxLjIzOS0uNzM2bDIuOTgyLS4yMzdMMjkuNjMuNTg5Yy4yMTMtLjUxNS41NTctLjUyMy43NzQgMGwxLjE0NiAyLjc2MyAyLjk4Mi4yMzdjLjU1Ni4wNDQuNjcuMzY4LjI0LjczNmwtMi4yNzQgMS45NDQuNjk2IDIuOTFjLjEzLjU0Mi0uMTQzLjc1LS42MjYuNDU0bC0yLjU1MS0xLjU2em0xMiAwbC0yLjU1MiAxLjU2MWMtLjQ3Ni4yOTEtLjc1OC4wOTYtLjYyNi0uNDU1bC42OTYtMi45MDktMi4yNzMtMS45NDRjLS40MjQtLjM2Mi0uMzI1LS42OTEuMjM5LS43MzZsMi45ODItLjIzN0w0MS42My41ODljLjIxMy0uNTE1LjU1Ny0uNTIzLjc3NCAwbDEuMTQ2IDIuNzYzIDIuOTgyLjIzN2MuNTU2LjA0NC42Ny4zNjguMjQuNzM2bC0yLjI3NCAxLjk0NC42OTYgMi45MWMuMTMuNTQyLS4xNDMuNzUtLjYyNi40NTRsLTIuNTUxLTEuNTZ6IiBmaWxsPSJ1cmwoI2EpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4="
+              alt
+            >
+            <span v-text="k.items.restaurant.rating"></span>
+            <span>
+              {{`${ JSON.parse(k.items.restaurant.business_info)
+              .recent_order_num_display}`}}单
+            </span>
+            <i class="fr"></i>
+          </section>
+          <section class="clearfix content_3_w">
+            <div class="fl">
+              <span>￥{{k.items.restaurant.piecewise_agent_fee.rules[0]['price']}}起送</span>
+              <span class="peisong">{{k.items.restaurant.piecewise_agent_fee.description}}</span>
+            </div>
+            <div class="fr">
+              <span>17km</span>
+              <span>34分钟</span>
+            </div>
+          </section>
+          <section class="content_4_w">
+            <span
+              v-for="(ks,inds) in k.items.restaurant.support_tags"
+              :key="inds"
+              v-text="ks.text"
+              :style="{'color':ks.color,'borderColor':'#'+ks.border}"
+            ></span>
+            <b
+              class="zhuan"
+              v-text="`${k.items.restaurant.delivery_mode?k.items.restaurant.delivery_mode.text:''}`"
+            ></b>
+          </section>
+          <section class="content_5_w clearfix">
+            <div class="c5_box fl">
+              <div class="c5_le">
+                <span class="jian_red">减</span>
+                <span
+                  class="jian_p"
+                  v-text="`${k.items.restaurant.activities[0]?k.items.restaurant.activities[0].description:''}`"
+                ></span>
+              </div>
+              <div class="c5_le">
+                <span class="jian_red">特</span>
+                <span>特价商品8.8元</span>
+              </div>
+            </div>
+            <div class="fr huodong">
+              <span>4个活动</span>
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjOTk5IiBkPSJNNC41NzcgNS40MjNjLjc5Ljc3IDIuMDczLjc2NyAyLjg1NyAwbDQuMTItNC4wMjZDMTIuMzQ1LjYyNSAxMi4wOSAwIDEwLjk4NSAwSDEuMDI3Qy0uMDc3IDAtLjMzLjYzLjQ1NyAxLjM5N2w0LjEyIDQuMDI2eiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+"
+                alt
+              >
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <img
+      v-show="loading_isok"
+      class="loading"
+      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560592832689&di=63953333a337ceb70dbb17d8f7ce3758&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F98aefafe79d36f431f17dba205b3d4faa3684a2f96c1-qG1kd0_fw658"
+      alt
+    >
+    <div class v-show="load_zheng" style="width:100%;text-align:center;">
+      <img
+        style="width:1rem;height:1rem"
+        src="http://img.lanrentuku.com/img/allimg/1212/5-121204193R0-50.gif"
+        alt
+      >
+      正在加载
+    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -165,8 +197,8 @@ export default {
           // console.log("ok");
           this.page++;
           this.init();
-        }else{
-          console.log('我滚了');
+        } else {
+          console.log("我滚了");
         }
       }
     },
@@ -386,7 +418,7 @@ export default {
       color: #999;
       font-size: 0.306667rem;
     }
-    input {
+    .login {
       padding: 0.266667rem;
       padding: 2.666667vw;
       min-width: 3.2rem;

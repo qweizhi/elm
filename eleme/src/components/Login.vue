@@ -58,6 +58,7 @@ export default {
           name: "my"
         });
         this.$store.state.isFooter = 1;
+        this.$store.state.cur_num = 3;
       } else {
         $(".advice").text("请填写手机号码");
       }
