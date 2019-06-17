@@ -53,7 +53,7 @@ export default {
       if (/^1(3|4|5|6|7|8|9)\d{9}$/.test(username)) {
         $(".advice").css("display", "none");
         // console.log(username);
-        this.setCookie("number", username, -1);
+        this.setCookie("number", username, 1);
         this.$router.push({
           name: "my"
         });
