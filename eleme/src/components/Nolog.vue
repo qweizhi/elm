@@ -4,7 +4,7 @@
       <img :src="url">
       <h3>登录后查看外卖订单</h3>
       <!---->
-      <button>立即登录</button>
+      <router-link class="box" to="/login" >立即登录</router-link>
     </section>
   </div>
 </template>
@@ -41,7 +41,7 @@ section {
     font-weight: 400;
     font-size: 0.453333rem;
   }
-  button {
+  .box {
     padding: 0.266667rem;
     padding: 2.666667vw;
     min-width: 3.2rem;

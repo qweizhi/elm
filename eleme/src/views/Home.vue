@@ -34,6 +34,7 @@ export default {
 .home {
   margin-bottom: 1.6rem;
   background: #fff;
+  // overflow: auto;
 }
 </style>
 

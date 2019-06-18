@@ -6,11 +6,7 @@
       height: 1.173333rem;
       height: 11.733333vw;
   }
-  *, ::after, ::before {
-      -webkit-box-sizing: inherit;
-      box-sizing: inherit;
-      -webkit-tap-highlight-color: transparent;
-  }
+
   element.style {
       z-index: 8844;
   }

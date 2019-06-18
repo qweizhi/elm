@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 *,
 :after,
 :before {
   /* box-sizing: inherit; */
   -webkit-tap-highlight-color: transparent;
 }
+=======
+
+>>>>>>> c9d2e0a6ce021fc9e366e8fbf905c3d6a35960d7
 html {
   background-color: #f5f5f5;
   color: #333;
