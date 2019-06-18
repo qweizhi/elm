@@ -62,6 +62,18 @@ export default {
     cur_num() {
       return this.$store.state.cur_num;
     }
+  },
+  created() {
+    console.log(this.$router.app._route);
+    if (this.$router.app._route.name == "home") {
+      this.$store.state.cur_num = 0;
+    } else if (this.$router.app._route.name == "find") {
+      this.$store.state.cur_num = 1;
+    } else if (this.$router.app._route.name == "order") {
+      this.$store.state.cur_num = 2;
+    } else if (this.$router.app._route.name == "my") {
+      this.$store.state.cur_num = 3;
+    }
   }
 };
 </script>

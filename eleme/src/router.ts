@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-
+import Order from "./components/Order.vue";
 import My from "./views/My.vue";
 import Find from "./views/Find.vue";
 
@@ -53,12 +53,13 @@ export default new Router({
     {
       path: "/order",
       name: "order",
+      component: Order
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       // component: () => import(/* webpackChunkName: "about" */ './components/Order.vue'),
       // 路由懒加载
-      component: resolve => require(["@/components/Order"], resolve)
+      // component: resolve => require(["@/components/Order"], resolve)
     },
     {
       path: "/lineItem",
