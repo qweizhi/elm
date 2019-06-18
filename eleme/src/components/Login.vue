@@ -71,6 +71,9 @@ export default {
       now.setDate(now.getDate() + iDay); //iDay:5天后失效， -1：立即失效
       document.cookie = key + "=" + value + ";expires=" + now + ";path=/";
     }
+  },
+  destroyed(){
+    return (this.$store.state.isFooter = 1);
   }
 };
 </script>

@@ -36,6 +36,9 @@ export default {
         });
         this.$store.state.isFooter = 1
     }
+  },
+  destroyed(){
+    this.$store.state.isFooter = 1
   }
 };
 </script>
