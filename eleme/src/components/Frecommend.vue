@@ -9,31 +9,31 @@
       </div>
       <p class="taste">你的口味，我都懂得</p>
       <ul class="food clearfix">
-        <li v-for="(item,index) in arr" :key="index">
-          <img :src="item.url" alt>
-          <div class="one">
-            <h4>{{item.food}}</h4>
-            <div>{{item.sale}}</div>
-          </div>
-          <div class="two">
-            <div class="price">
-              <span class="price_l">
-                <i aria-hidden="true">¥</i>
-                <span>{{item.price}}</span>
-              </span>
-              <!---->
+          <li v-for="(item,index) in arr" :key="index" @click="judge()">
+            <img :src="item.url" alt>
+            <div class="one">
+              <h4>{{item.food}}</h4>
+              <div>{{item.sale}}</div>
             </div>
-            <div class="recommend-2Nr2c">
-              <span>{{item.discount}}</span>
+            <div class="two">
+              <div class="price">
+                <span class="price_l">
+                  <i aria-hidden="true">¥</i>
+                  <span>{{item.price}}</span>
+                </span>
+                <!---->
+              </div>
+              <div class="recommend-2Nr2c">
+                <span>{{item.discount}}</span>
+              </div>
             </div>
-          </div>
-          <div class="three">
-            <div class="recommend-evJyV">
-              <i class="iconfont icon-dianzan"></i>
-              <span>{{item.address}}</span>
+            <div class="three">
+              <div class="recommend-evJyV">
+                <i class="iconfont icon-dianzan"></i>
+                <span>{{item.address}}</span>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
       </ul>
     </section>
   </div>
@@ -99,6 +99,31 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    getCookie(key) {
+      //获取cookie值
+      var str = document.cookie; //name=malin; psw=123456
+      var arr = str.split("; "); //[name=malin,psw=123456]
+      for (var ele of arr) {
+        var arr2 = ele.split("="); //[name,malin]
+        if (key == arr2[0]) {
+          return arr2[1];
+        }
+      }
+    },
+    judge(){
+      var user = this.getCookie("number");
+      if(user){
+        this.$router.push({
+          name: 'shop'
+        })
+      }else{
+        this.$router.push({
+          name: 'login'
+        })
+      }
+    }
   }
 };
 </script>
