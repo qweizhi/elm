@@ -34,7 +34,7 @@ import ShopFooter from '@/components/ShopFooter.vue';
     // 通头部出现
     this.$store.state.isFooter = 0;
     this.$store.state.isshopfooter = 1;
-    
+
   },
   mounted() {
     window.onscroll = (e) => {

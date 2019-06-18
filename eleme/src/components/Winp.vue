@@ -18,7 +18,6 @@ export default {
   position:sticky;
   z-index: 999;
   top: 0;
-  width: 92.6%;
   left: 0px;
   padding: 0.2rem 0.373333rem;
   margin: -0.013333rem 0;

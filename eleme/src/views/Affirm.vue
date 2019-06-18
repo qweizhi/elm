@@ -103,7 +103,7 @@
                     <span class="cart-group-SdXAD" v-text="k[3]">不辣</span>
                   </p>
                 </div>
-                <span class="cart-group-1vF9L">×&nbsp;2</span>
+                <span class="cart-group-1vF9L">×&nbsp;1</span>
                 <span class="cart-group-3GWE2">
                   <!---->
                 </span>
@@ -272,44 +272,44 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import store from "@/store";
+import Vue from 'vue';
+import store from '@/store';
 export default Vue.extend({
-    data(){
+    data() {
         return{
             number : 0,
             tatal : 0,
-            xinList :[], 
-            
-        }
-    
+            xinList : [],
+
+        };
+
     },
     created() {
     // 通头部出现
-    this.$store.state.isshopfooter=0;
+    this.$store.state.isshopfooter = 0;
     this.$store.state.isFooter = 1;
-    
+
   },
-    mounted(){  
+    mounted() {
       console.log(this.$route.params.tabaLiat);
     },
-    computed:{
+    computed: {
         // 取数据
-        add(){
+        add() {
             this.xinList = this.$route.params.tabaLiat;
             this.tatal = this.$route.params.tatal;
             this.number = this.$route.params.number;
         },
     },
-    methods:{
+    methods: {
         // 图片格式
         insertStr(soure, start, newStr) {
 
         return soure.slice(0, start) + newStr + soure.slice(start);
         },
     },
-   
-})
+
+});
 </script>
 
 

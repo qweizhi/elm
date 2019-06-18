@@ -98,12 +98,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
   data() {
     return {
       lis: [],
-      hight: "",
+      hight: '',
       page : 1,
       pageSize: 6,
     };
@@ -118,7 +118,7 @@ export default Vue.extend({
     async getLis() {
       // this.$store.state.loading += 1;
       const  data  = await this.$axios.get(
-      `https://www.easy-mock.com/mock/5cf66494c51c246c3655bfca/example/orderList?page=${this.page}&pageSize=${this.pageSize}`
+      `https://www.easy-mock.com/mock/5cf66494c51c246c3655bfca/example/orderList?page=${this.page}&pageSize=${this.pageSize}`,
       );
       // this.$store.state.loading -= 1;
       this.lis = [...this.lis, ...data.data];
@@ -128,15 +128,15 @@ export default Vue.extend({
     insertStr(soure, start, newStr) {
       // console.log(soure.slice(0, start),soure.slice(start))
       return soure.slice(0, start) + newStr + soure.slice(start);
-    }
+    },
   },
   mounted() {
     // 懒加载
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       this.hight = document.body.offsetHeight - window.innerHeight;
       if (window.scrollY >= this.hight) {
         this.page++;
-        if(this.page>=5){
+        if (this.page >= 5) {
           console.log(5);
           return;
         }
@@ -154,8 +154,8 @@ export default Vue.extend({
       // console.log(this.$store.state.loading);
       // 从仓库拿到一个值
       return this.$store.state.loading;
-    }
-  }
+    },
+  },
 });
 </script>
 

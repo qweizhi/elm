@@ -275,7 +275,7 @@ export default Vue.extend({
       this.shopList = data1.data.menu;
     },
     // 点击展开、拿数据
-    Skip(id,idx) {
+    Skip(id, idx) {
       // 下标
       // this.amount =idx;
       // console.log(this.amount)
@@ -315,12 +315,12 @@ export default Vue.extend({
       // 制返
       this.oh = false;
       // 将内容制返
-      
-      this.visible =false;
-      var arr = []; 
+
+      this.visible = false;
+      let arr = [];
       arr.push(a, b, c, this.la);
       this.orderList.push(arr);
-       
+
       // value的数据
       this.xinList.foods[0].is_featured++;
       // console.log(this.xinList);

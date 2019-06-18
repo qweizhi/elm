@@ -186,12 +186,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import store from "@/store";
+import store from '@/store';
 export default Vue.extend({
    created() {
     // 通头部出现
     this.$store.state.isFooter = true;
-    
+
   },
 });
 </script>

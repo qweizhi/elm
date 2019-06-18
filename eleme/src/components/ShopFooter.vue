@@ -174,8 +174,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import store from "@/store";
+import Vue from 'vue';
+import store from '@/store';
 // Vue.use(vuexI18n.plugin, store);
 export default Vue.extend({
   data() {
@@ -191,21 +191,21 @@ export default Vue.extend({
       number: 0,
       canhe: 0,
       zoom: 0,
-      taba: []
+      taba: [],
     };
   },
   // 监控自己定义的变量
   computed: {
     // 动态列表
     pagelists() {
-      if (this.$store.state.orderList != "" && "undefined") {
+      if (this.$store.state.orderList != '' && 'undefined') {
         this.song = false;
         this.iscolor = true;
         this.isbackground = true;
 
         // 数组数据
         this.taba = this.$store.state.orderList[0].orderList;
-        this.taba.map(item => {
+        this.taba.map((item) => {
           // 拿到单价
           this.tatal = Number(item[2]);
         });
@@ -213,18 +213,18 @@ export default Vue.extend({
         this.tatal2 += this.tatal;
         this.number += 1;
          // 判断是否显示
-        if(this.$store.state.onl=0){
-          this.$store.state.isshopfooder = 1;
-          this.$store.state.isFooter=0;
-        }else{
-          this.$store.state.isshopfooder = 0;
-          this.$store.state.isFooter=1;
-        }
+        // if (this.$store.state.onl = 0) {
+        //   this.$store.state.isshopfooder = 1;
+        //   this.$store.state.isFooter = 0;
+        // } else {
+        //   this.$store.state.isshopfooder = 0;
+        //   this.$store.state.isFooter = 1;
+        // }
       }
     },
-    isshopfooder(){
+    isshopfooder() {
       return this.$store.state.isshopfooder;
-    }
+    },
   },
   // mounted(){
   //   this.tatal=this.$refs.tatal_a.innerHTML;
@@ -240,19 +240,19 @@ export default Vue.extend({
     empty() {
       this.isfooter = true;
       this.taba = [];
-      this.number=0;
+      this.number = 0;
       this.tatal2 = 0;
       console.log(this.taba);
     },
     // 订单判断
     judge() {
       this.$router.push({
-        name: "affirm",
+        name: 'affirm',
         params: {
           tabaLiat: this.taba,
           tatal: this.tatal2,
-          number: this.number
-        }
+          number: this.number,
+        },
       });
     },
     // 点击购物车展开与隐藏
@@ -262,8 +262,8 @@ export default Vue.extend({
     // 点击透明层退出
     cartviem() {
       this.isfooter = true;
-    }
-  }
+    },
+  },
 });
 </script>
 

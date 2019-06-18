@@ -42,7 +42,7 @@
             <input type="button" value="登录">
         </div>
 
-        <div class="list_e_w">
+        <div @click="list_router" class="list_e_w" v-if="!cookie_name">
           <div class="item_w clearfix" v-for="(k,ind) in sort_item_w" :key="ind">
             <img class="item_img1_w fl" :src="`https://fuss10.elemecdn.com/${insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/').slice(-3) =='png'?insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/')+'.png':insertStr(insertStr(k.items.restaurant.image_path,1,'/'),4,'/') + '.jpeg'}`" alt="">
             <div class="item_w_lt fr">
@@ -91,14 +91,29 @@
             </div>
           </div>
         </div>
+        <img v-show="loading_isok" class="loading" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560592832689&di=63953333a337ceb70dbb17d8f7ce3758&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F98aefafe79d36f431f17dba205b3d4faa3684a2f96c1-qG1kd0_fw658" alt="">
+        <div class="" v-show="load_zheng" style="width:100%;text-align:center;">
+          <img style="width:1rem;height:1rem" src="http://img.lanrentuku.com/img/allimg/1212/5-121204193R0-50.gif" alt="">
+        正在加载
+        </div>
     </div>
 </template>
 <script>
 export default {
+  computed: {
+    loading_isok() {
+      return this.$store.state.loading_isok;
+    },
+    load_zheng() {
+      return this.$store.state.load_zheng;
+    },
+    cookie_name() {
+      return this.$store.state.cookie_name;
+    }
+  },
   data() {
     return {
       arr: "", //排序头部点击数据
-      cookie_name: "", //cookit有无
       sort_item_w: "", //商品数据
       page: 1, //商品数据页数
       pageSize: 10, //商品数据个数
@@ -124,25 +139,43 @@ export default {
     // console.log(data.outside);
     // console.log(data.outside[0].items.restaurant.business_info);
     this.arr = data.outside.inside_sort_filter;
-    this.cookie_name = this.getCookie(name);
-    // console.log(this.cookie_name);
+    if (this.getCookie("number")) {
+      this.$store.state.cookie_name = false;
+    } else {
+      this.$store.state.cookie_name = true;
+    }
     this.init();
   },
   mounted() {
-    window.onscroll = () => {
+    window.addEventListener("scroll", this.homescroll, true);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.homescroll, false);
+    this.$store.state.mark_isok = false;
+    this.move();
+  },
+  methods: {
+    homescroll() {
       //滚动条滑动加载
       // console.log(document.body.scrollHeight - window.innerHeight);
       // console.log(window.scrollY);
-      this.load_w = document.body.scrollHeight - window.innerHeight;
-      if (window.scrollY >= this.load_w) {
-        // console.log("ok");
-        this.page++;
-        this.init();
+      if (this.getCookie("number")) {
+        this.load_w = document.body.scrollHeight - window.innerHeight;
+        if (window.scrollY >= this.load_w) {
+          // console.log("ok");
+          this.page++;
+          this.init();
+        }
       }
-    };
-  },
-  methods: {
+    },
     async init() {
+      if (this.sort_item_w) {
+        this.$store.state.load_zheng = true;
+        this.$store.state.loading_isok = false;
+      } else {
+        this.$store.state.loading_isok = true;
+      }
+      // setInterval(()=>{
       console.log("列表页运行");
       let item_data = await this.$axios.get(
         //商品列表
@@ -160,6 +193,12 @@ export default {
       //   item_data.data.data[0].items.restaurant.piecewise_agent_fee.rules[0]
       // );
       this.sort_item_w = [...this.sort_item_w, ...item_data.data.data];
+      this.$store.state.load_zheng = false;
+      if (this.sort_item_w) {
+        this.$store.state.loading_isok = false;
+      }
+
+      // },1000)
     },
     getCookie: function(c_name) {
       //获取cookit
@@ -212,6 +251,9 @@ export default {
       };
       document.body.style.overflow = ""; //出现滚动条
       document.removeEventListener("touchmove", mo, false);
+    },
+    list_router() {
+      this.$router.push({ path: "shop" });
     }
   }
 };
@@ -219,6 +261,13 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/iconfont/iconfont.css";
 @import "../assets/iconfont/demo.css";
+.loading {
+  width: 4rem;
+  height: 4rem;
+  background: #fff;
+  transform: translateX(3rem);
+  position: relative;
+}
 .w-sort {
   // padding-bottom: 0.266667rem;
   h2 {

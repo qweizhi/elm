@@ -13,13 +13,6 @@ export default {
       return this.$store.state.get_city;
     }
   },
-  mounted() {
-    setTimeout(() => {
-      if (this.$store.state.get_city == "") {
-        this.$store.commit("load_left");
-      }
-    }, 2000);
-  },
   methods: {
     city_dw() {
       this.$store.commit("load_left");
