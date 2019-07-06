@@ -14,10 +14,6 @@ export default {
     // "orderList":resolve=>(['./order'],resolve)
     orderList
   },
-<<<<<<< HEAD
-  created() {
-
-=======
   methods:{
     getCookie(key) {
       //获取cookie值
@@ -42,7 +38,6 @@ export default {
         name: 'no_log'
       })
     }
->>>>>>> c9d2e0a6ce021fc9e366e8fbf905c3d6a35960d7
   }
 
 };

@@ -22,7 +22,7 @@
             <section class="MessageLogin-15xD9">
               新用户登录即自动注册，并表示已同意
               <a
-                href="//h5.ele.me/service/agreement/#initTitle=%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE&amp;key=ruleQue18"
+                href="http://h5.ele.me/service/agreement/#initTitle=%E7%94%A8%E6%88%B7%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE&amp;key=ruleQue18"
               >《用户服务协议》</a>
             </section>
             <button class="SubmitButton-2wG4T" type="button" @click="login_user">登录</button>
@@ -39,7 +39,7 @@
 export default {
   data() {
     return {
-      url: "//shadow.elemecdn.com/faas/h5/static/logo.ba876fd.png"
+      url: "https://shadow.elemecdn.com/faas/h5/static/logo.ba876fd.png"
     };
   },
   created() {
@@ -72,7 +72,7 @@ export default {
       document.cookie = key + "=" + value + ";expires=" + now + ";path=/";
     }
   },
-  destroyed(){
+  destroyed() {
     return (this.$store.state.isFooter = 1);
   }
 };

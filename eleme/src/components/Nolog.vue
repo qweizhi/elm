@@ -10,11 +10,12 @@
 </template>
 <script>
 export default {
-    data(){
-        return{
-            url: "//fuss10.elemecdn.com/d/60/70008646170d1f654e926a2aaa3afpng.png"
-        } 
-    }
+  data() {
+    return {
+      url:
+        "https://fuss10.elemecdn.com/d/60/70008646170d1f654e926a2aaa3afpng.png"
+    };
+  }
 };
 </script>
 <style lang="scss" scoped>

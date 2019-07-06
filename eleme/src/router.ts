@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
@@ -8,19 +7,11 @@ import Shop from './views/Shop.vue';
 
 import My from './views/My.vue';
 import Find from './views/Find.vue';
-=======
-import Vue from "vue";
-import Router from "vue-router";
-import Home from "./views/Home.vue";
-import Order from "./components/Order.vue";
-import My from "./views/My.vue";
-import Find from "./views/Find.vue";
->>>>>>> c9d2e0a6ce021fc9e366e8fbf905c3d6a35960d7
 
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
     {
